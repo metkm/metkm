@@ -12,12 +12,19 @@ let animating = false
 const handlePointerEnter = ({ object }: { object: Mesh }) => {
   if (animating) return
 
-  gsap.to(object.position, {
-    z: 1,
+  const timeline = gsap.timeline({
     onComplete: () => {
       animating = false
     },
   })
+
+  timeline.to(object.position, {
+    z: 1,
+  }, 'start')
+
+  timeline.to(object.scale, {
+    z: 20,
+  }, 'start')
 
   animating = true
 }
@@ -25,12 +32,15 @@ const handlePointerEnter = ({ object }: { object: Mesh }) => {
 const handlePointerLeave = ({ object }: { object: Mesh }) => {
   if (!animating) return
 
-  gsap.to(object.position, {
+  const timeline = gsap.timeline()
+
+  timeline.to(object.position, {
     z: 0,
-    onComplete: () => {
-      animating = false
-    },
-  })
+  }, 'start')
+
+  timeline.to(object.scale, {
+    z: 0.1,
+  }, 'start')
 
   animating = false
 }
@@ -46,7 +56,7 @@ const handlePointerLeave = ({ object }: { object: Mesh }) => {
     @pointer-enter="handlePointerEnter"
     @pointer-leave="handlePointerLeave"
   >
-    <TresBoxGeometry :args="[4, 4, 0]" />
+    <TresBoxGeometry :args="[4, 4, 0.1]" />
     <TresMeshBasicMaterial :map="texture" />
   </TresMesh>
 </template>
