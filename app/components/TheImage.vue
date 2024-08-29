@@ -1,83 +1,28 @@
 <script setup lang="ts">
-import type { Texture, Intersection } from 'three'
-import gsap from 'gsap'
+import type { Texture } from 'three'
 
-defineProps<{
+const props = defineProps<{
   texture: Texture
   index: number
 }>()
 
-const { camera } = useTresContext()
+const width = 8
+const height = 4.5
+const maxPerLine = 50
 
-let animating = false
-
-const handlePointerEnter = ({ object }: Intersection & PointerEvent) => {
-  if (animating) return
-
-  const timeline = gsap.timeline({
-    onComplete: () => {
-      animating = false
-    },
-  })
-
-  timeline.to(
-    object.position,
-    {
-      z: 1,
-    },
-    'start',
-  )
-
-  timeline.to(
-    object.scale,
-    {
-      z: 20,
-    },
-    'start',
-  )
-
-  animating = true
-}
-
-const handlePointerLeave = ({ object }: Intersection & PointerEvent) => {
-  if (!animating) return
-
-  const timeline = gsap.timeline()
-
-  timeline.to(
-    object.position,
-    {
-      z: 0,
-    },
-    'start',
-  )
-
-  timeline.to(
-    object.scale,
-    {
-      z: 0.1,
-    },
-    'start',
-  )
-
-  animating = false
-}
-
-const handleClick = (event: Intersection & PointerEvent) => {
-  if (!camera.value) return
-
-  gsap.to(camera.value.position, { x: event.object.position.x, y: event.object.position.y })
-}
+const position = [
+  props.index * width - Math.floor(props.index / maxPerLine) * (maxPerLine * width),
+  -Math.floor(props.index / maxPerLine) * height,
+  0,
+]
 </script>
 
 <template>
   <TresMesh
-    :position="[index * 4 - Math.floor(index / 10) * (10 * 4), -Math.floor(index / 10) * 4, 0]"
-    @click="handleClick"
-    @pointer-enter="handlePointerEnter"
-    @pointer-leave="handlePointerLeave"
+    :position="position"
   >
-    <TresBoxGeometry :args="[4, 4, 0.1]" />
+    <!-- :rotation="[-0.5, 0.5, 0.5]" -->
+    <TresBoxGeometry :args="[width, height, 0.1]" />
     <TresMeshBasicMaterial :map="texture" />
   </TresMesh>
 </template>
