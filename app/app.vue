@@ -1,42 +1,63 @@
 <script setup lang="ts">
-import { images } from './constants'
+import { extend, vLightHelper } from '@tresjs/core'
+import { AxesHelper, DoubleSide } from 'three'
 
-const selectedItem = ref()
-
-const radius = 240
-
-const getTranslate = (index: number) => {
-  const radians = 45 * Math.PI / 180
-
-  const x = Math.cos(index * radians) * radius
-  const y = Math.sin(index * radians) * radius
-
-  return `translate(${x}px, ${y}px)`
-}
+extend({ AxesHelper })
 </script>
 
 <template>
-  <main class="grid place-content-center h-screen w-screen overflow-hidden">
-    <ol class="relative rounded-full size-80 bg-neutral-200/40 m-auto">
-      <li
-        v-for="(image, index) in images"
-        :key="image"
-        class="absolute inset-0 m-auto size-28 transition-all"
-        :style="{ transform: getTranslate(index) }"
-        :class="{ '!translate-x-0 !translate-y-0 !size-80': image === selectedItem }"
-      >
-        <button
-          class="w-full h-full"
-          @click="selectedItem = image"
-        >
-          <img
-            :src="image"
-            class="h-full w-full object-cover rounded-full"
-          >
-        </button>
-      </li>
-    </ol>
-  </main>
+  <TresCanvas
+    window-size
+    shadows
+  >
+    <TresPerspectiveCamera
+      :position="[5, 0, -10]"
+      :look-at="[0, 0, 0]"
+      :args="[45, 1, 0.1, 1000]"
+    />
+
+    <TheControls />
+    <TresAxesHelper />
+
+    <TresSpotLight
+      v-light-helper
+      :args="['#213159']"
+      :position="[0, 12, -12]"
+      :power="20_000"
+      :intensity="15_000"
+      :angle="0.5"
+      :shadow-bias="-0.005"
+      cast-shadow
+      color="#213159"
+    />
+
+    <TresMesh
+      receive-shadow
+      cast-shadow
+      :position="[0, 0, 0]"
+    >
+      <TresSphereGeometry :args="[1.5]" />
+      <TresMeshStandardMaterial :shadow-side="DoubleSide" />
+    </TresMesh>
+
+    <TresMesh
+      receive-shadow
+      cast-shadow
+      :position="[0, -3, 0]"
+      :rotation="[-Math.PI / 2, 0, 0]"
+    >
+      <TresPlaneGeometry :args="[10, 10, 10, 10]" />
+      <TresMeshStandardMaterial
+        color="#f7f7f7"
+        :side="DoubleSide"
+      />
+    </TresMesh>
+
+    <!-- <TresMesh receive-shadow>
+      <TresSphereGeometry :args="[20]" />
+      <TresMeshStandardMaterial :side="DoubleSide" />
+    </TresMesh> -->
+  </TresCanvas>
 </template>
 
 <style>

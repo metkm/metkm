@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
+    '@tresjs/nuxt',
   ],
   eslint: {
     config: {
