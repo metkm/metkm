@@ -9,10 +9,19 @@ const container = useTemplateRef(`container`)
 const { isOutside } = useMouseInElement(container)
 const { tilt, roll } = useParallax(container)
 
+const random = Math.floor(Math.random() * 20)
+
+const baseStyle: StyleValue = {
+  translate: `0px ${random}px`,
+}
+
 const style = computed<StyleValue>(() => {
-  if (isOutside.value) return
+  if (isOutside.value) {
+    return baseStyle
+  }
 
   return {
+    ...baseStyle,
     transform: `rotateX(${roll.value * 10}deg) rotateY(${tilt.value * 10}deg)`,
   }
 })

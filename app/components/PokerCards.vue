@@ -10,7 +10,7 @@ defineProps<{
       <li
         v-for="item in items"
         :key="item.id"
-        class="flex shrink-0 -ml-14 perspective overflow-hidden p-4"
+        class="flex shrink-0 -ml-14 perspective overflow-hidden p-4 pb-8"
       >
         <PokerCard
           :image="item.image"
