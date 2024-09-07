@@ -19,3 +19,12 @@ export const images = [
   '/images/spodate.png',
   '/images/spoti-wrapped.png',
 ]
+
+export const imagesWithIds = images.map((image) => {
+  const id = crypto.randomUUID()
+
+  return {
+    id,
+    image,
+  }
+})

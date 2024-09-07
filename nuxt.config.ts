@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@tresjs/nuxt'],
+  modules: ['@nuxt/eslint', '@nuxtjs/tailwindcss', '@vueuse/nuxt'],
   eslint: {
     config: {
       stylistic: true,
@@ -11,4 +11,5 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
   },
+  ssr: false,
 })
