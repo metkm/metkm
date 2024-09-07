@@ -9,7 +9,7 @@ const container = useTemplateRef(`container`)
 const { isOutside } = useMouseInElement(container)
 const { tilt, roll } = useParallax(container)
 
-const random = Math.floor(Math.random() * 20)
+const random = Math.floor(Math.random() * 10)
 
 const baseStyle: StyleValue = {
   translate: `0px ${random}px`,
@@ -30,7 +30,7 @@ const style = computed<StyleValue>(() => {
 <template>
   <button
     ref="container"
-    class="w-60 aspect-[2/3] rounded-lg overflow-hidden shadow-lg trans"
+    class="w-60 aspect-[2/3] rounded-lg overflow-hidden shadow-lg transition-transform ease-linear"
     :style="style"
   >
     <img
@@ -40,9 +40,3 @@ const style = computed<StyleValue>(() => {
     >
   </button>
 </template>
-
-<style>
-.trans {
-  transition: 300ms ease-out all;
-}
-</style>
