@@ -1,3 +1,5 @@
+import type { Card } from './types/card'
+
 export const images = [
   // 'https://pbs.twimg.com/media/GUrlgwhXsAASMRE?format=jpg&name=large',
   // 'https://i.scdn.co/image/ab67616d0000b273cda1dde174c38419df93c736',
@@ -20,7 +22,7 @@ export const images = [
   '/images/spoti-wrapped.png',
 ]
 
-export const imagesWithIds = images.map((image) => {
+export const imagesWithIds: Array<Card> = images.map((image) => {
   const id = crypto.randomUUID()
 
   return {

@@ -1,26 +1,32 @@
 <script setup lang="ts">
+// import { imagesWithIds } from './constants'
 import { imagesWithIds } from './constants'
+import type { Card } from './types/card'
 
-const selectedCard = shallowRef<typeof imagesWithIds[number]>()
-const cards = ref(imagesWithIds)
+const selected = ref<Card>()
+const items = ref(imagesWithIds)
 
-const removeRandom = () => {
-  cards.value.splice(2, 1)
-}
+const cardPlaceholder = useTemplateRef('card:placeholder')
+const placeholderBounds = useElementBounding(cardPlaceholder)
 </script>
 
 <template>
-  <main class="flex flex-col justify-between relative min-h-screen p-4">
-    <div>
-      <p>main content</p>
-      <button @click="removeRandom">
-        remove random
-      </button>
-    </div>
-
-    <PokerCards
-      v-model="selectedCard"
-      :items="cards"
+  <main class="relative flex flex-col p-4 justify-between h-screen">
+    <div
+      ref="card:placeholder"
+      class="rounded-lg mx-auto bg-neutral-400 w-60 aspect-[2/3]"
     />
+
+    <TheCards
+      v-model="selected"
+      v-model:items="items"
+      :target-bounds="placeholderBounds"
+    />
+
+    <!-- <PokerCards
+      v-model="selected"
+      v-model:items="imagesWithIds"
+      :target-bound="placeholderBound"
+    /> -->
   </main>
 </template>
