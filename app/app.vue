@@ -8,6 +8,8 @@ const items = ref(imagesWithIds)
 
 const bgColor = useState<RGBColor | undefined>('bg:color')
 
+const bgShadowColor = computed(() => `0 20px 25px -5px rgba(${bgColor.value?.join(',')}, 0.2), 0 8px 10px -6px rgba(${bgColor.value?.join(',')}, 0.2)`)
+
 const cardPlaceholder = useTemplateRef('card:placeholder')
 const placeholderBounds = useElementBounding(cardPlaceholder)
 </script>
@@ -15,17 +17,13 @@ const placeholderBounds = useElementBounding(cardPlaceholder)
 <template>
   <main class="flex overflow-hidden h-screen">
     <div
-      class="relative flex flex-col justify-between p-4 h-full w-screen shrink-0 transition-all duration-700"
+      class="relative flex flex-col justify-between p-4 pt-8 h-full w-screen shrink-0 transition-all duration-700"
       :class="{ '!w-1/4': selected }"
     >
       <div
-        class="absolute size-1/2  blur-[200px] -translate-x-1/2 -translate-y-1/2 left-0 top-0"
-        :style="{ backgroundColor: `rgb(${bgColor?.[0]}, ${bgColor?.[1]}, ${bgColor?.[2]})` }"
-      />
-
-      <div
         ref="card:placeholder"
         class="rounded-lg mx-auto bg-neutral-200 w-60 aspect-[2/3]"
+        :style="{ boxShadow: bgShadowColor }"
       />
 
       <TheCards
@@ -35,8 +33,16 @@ const placeholderBounds = useElementBounding(cardPlaceholder)
       />
     </div>
 
-    <div class="bg-red-500 h-full w-screen shrink-0">
-      <p>hello</p>
+    <div class="flex items-center p-4 pr-8 h-full w-[calc(100vw-25%)] shrink-0">
+      <section
+        class="border rounded-lg p-4 w-full shadow-xl shadow-red-500 aspect-video"
+        :style="{
+          boxShadow: bgShadowColor,
+        }"
+      >
+        <h1>Main Content will be here.</h1>
+        <p>some fancy description</p>
+      </section>
     </div>
   </main>
 </template>
