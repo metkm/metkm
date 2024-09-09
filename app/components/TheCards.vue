@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { UseElementBoundingReturn } from '@vueuse/core'
+import ColorThief from 'colorthief'
 import type { Card } from '~/types/card'
 
 const { targetBounds } = defineProps<{
@@ -9,7 +10,10 @@ const { targetBounds } = defineProps<{
 const modelValue = defineModel<Card>()
 const modelValueItems = defineModel<Card[]>('items', { default: [] })
 
+const bgColor = useState('bg:color')
+
 const ITEM_WIDTH = 240 - 40
+const colorThief = new ColorThief()
 
 const modelValueElement = shallowRef<HTMLElement>()
 const modelValueElementAnimatedFromBounds = shallowRef({
@@ -17,7 +21,9 @@ const modelValueElementAnimatedFromBounds = shallowRef({
   top: 0,
 })
 
+const container = useTemplateRef('container')
 const { width } = useWindowSize()
+const { width: containerWidth } = useElementSize(container)
 
 const modelValueIndex = computed(() => {
   const i = modelValueItems.value.findIndex(item => item.id === modelValue.value?.id)
@@ -42,6 +48,17 @@ const applyPosition = (el: HTMLElement, left: number, top: number) => {
 }
 
 const handleSelect = async (event: Event, item: Card) => {
+  if (modelValue.value && modelValueElement.value) {
+    applyPosition(modelValueElement.value, modelValueElementAnimatedFromBounds.value.left, modelValueElementAnimatedFromBounds.value.top)
+
+    modelValue.value = undefined
+    modelValueElement.value = undefined
+    return
+  }
+
+  const imgElement = event.target as HTMLImageElement
+  bgColor.value = colorThief.getColor(imgElement)
+
   const target = toHtmlElement(event.currentTarget)
   const { left, top } = target.getBoundingClientRect()
 
@@ -63,9 +80,12 @@ const handleSelect = async (event: Event, item: Card) => {
   modelValue.value = item
 }
 
+const getIndexOffset = (index: number) => {
+  return modelValueIndex.value !== undefined && modelValueIndex.value < index ? index - 1 : index
+}
+
 watch(width, () => {
   if (!modelValueElement.value) return
-  console.log(targetBounds.left.value)
   applyPosition(modelValueElement.value, targetBounds.left.value, targetBounds.top.value)
 }, {
   flush: 'post',
@@ -75,14 +95,14 @@ watch(width, () => {
 <template>
   <ol
     ref="container"
-    class="h-96"
+    class="flex h-96"
   >
     <li
       v-for="(item, index) in modelValueItems"
       :key="item.id"
-      class="transition-all absolute perspective"
+      class="absolute transition-all ease-out duration-300 perspective"
       :style="{
-        left: `${(modelValueIndex !== undefined && modelValueIndex < index ? index - 1 : index) * ITEM_WIDTH + offset}px`,
+        left: `${!modelValue ? getIndexOffset(index) * ITEM_WIDTH + offset : (containerWidth / 2 - ITEM_WIDTH / 2)}px`,
       }"
       @click="handleSelect($event, item)"
     >
