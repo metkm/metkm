@@ -9,7 +9,7 @@ const { targetBounds } = defineProps<{
 const modelValue = defineModel<Card>()
 const modelValueItems = defineModel<Card[]>('items', { default: [] })
 
-const ITEM_WIDTH = 240
+const ITEM_WIDTH = 240 - 40
 
 const modelValueElement = shallowRef<HTMLElement>()
 const modelValueElementAnimatedFromBounds = shallowRef({
@@ -72,13 +72,22 @@ const handleSelect = async (event: Event, item: Card) => {
     <li
       v-for="(item, index) in modelValueItems"
       :key="item.id"
-      class="transition-all absolute"
+      class="transition-all absolute perspective"
       :style="{
         left: `${(modelValueIndex !== undefined && modelValueIndex < index ? index - 1 : index) * ITEM_WIDTH + offset}px`,
       }"
       @click="handleSelect($event, item)"
     >
-      <TheCard :item="item" />
+      <TheCard
+        :item="item"
+        :index="index - (modelValueItems.length / 2)"
+      />
     </li>
   </ol>
 </template>
+
+<style>
+.perspective {
+  perspective: 300px;
+}
+</style>
