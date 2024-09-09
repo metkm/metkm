@@ -62,6 +62,14 @@ const handleSelect = async (event: Event, item: Card) => {
 
   modelValue.value = item
 }
+
+watch(width, () => {
+  if (!modelValueElement.value) return
+  console.log(targetBounds.left.value)
+  applyPosition(modelValueElement.value, targetBounds.left.value, targetBounds.top.value)
+}, {
+  flush: 'post',
+})
 </script>
 
 <template>
