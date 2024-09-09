@@ -9,17 +9,28 @@ const { targetBounds } = defineProps<{
 const modelValue = defineModel<Card>()
 const modelValueItems = defineModel<Card[]>('items', { default: [] })
 
-const ITEM_WIDTH = 240 - 40
+const ITEM_WIDTH = 240
 
 const modelValueElement = shallowRef<HTMLElement>()
-const modelValueElementAnimatedFrom = shallowRef({
+const modelValueElementAnimatedFromBounds = shallowRef({
   left: 0,
   top: 0,
 })
 
 const { width } = useWindowSize()
 
-const offset = computed(() => (width.value - ITEM_WIDTH * modelValueItems.value?.length) / 2)
+const modelValueIndex = computed(() => {
+  const i = modelValueItems.value.findIndex(item => item.id === modelValue.value?.id)
+
+  return i === -1 ? undefined : i
+})
+
+const offset = computed(() => {
+  const len = modelValue.value ? modelValueItems.value.length - 1 : modelValueItems.value.length
+  const wid = ITEM_WIDTH * len
+
+  return (width.value - wid) / 2
+})
 
 const toHtmlElement = (el: Element | EventTarget | null) => {
   return el as HTMLElement
@@ -30,43 +41,25 @@ const applyPosition = (el: HTMLElement, left: number, top: number) => {
   el.style.top = `${top}px`
 }
 
-const handleSelect = (event: Event, item: Card) => {
+const handleSelect = async (event: Event, item: Card) => {
   const target = toHtmlElement(event.currentTarget)
   const { left, top } = target.getBoundingClientRect()
 
-  if (modelValueElement.value) {
-    applyPosition(modelValueElement.value, targetBounds.left.value, targetBounds.top.value)
-
-    requestAnimationFrame(() => {
-      applyPosition(
-        modelValueElement.value!,
-        modelValueElementAnimatedFrom.value.left,
-        modelValueElementAnimatedFrom.value.top,
-      )
-
-      modelValueElement.value = target
-
-      const animatedFrom = target.getBoundingClientRect()
-      modelValueElementAnimatedFrom.value = {
-        left: animatedFrom.left,
-        top: animatedFrom.top,
-      }
-    })
+  modelValueElementAnimatedFromBounds.value = {
+    left,
+    top,
   }
-  else {
-    modelValueElement.value = target
-    const animatedFrom = target.getBoundingClientRect()
-    modelValueElementAnimatedFrom.value = {
-      left: animatedFrom.left,
-      top: animatedFrom.top,
-    }
+
+  if (modelValueElement.value) {
+    applyPosition(modelValueElement.value, left, top)
   }
 
   applyPosition(target, left, top)
-
   requestAnimationFrame(() => {
     applyPosition(target, targetBounds.left.value, targetBounds.top.value)
+    modelValueElement.value = target
   })
+
   modelValue.value = item
 }
 </script>
@@ -81,7 +74,7 @@ const handleSelect = (event: Event, item: Card) => {
       :key="item.id"
       class="transition-all absolute"
       :style="{
-        left: `${offset + index * ITEM_WIDTH}px`,
+        left: `${(modelValueIndex !== undefined && modelValueIndex < index ? index - 1 : index) * ITEM_WIDTH + offset}px`,
       }"
       @click="handleSelect($event, item)"
     >
