@@ -33,16 +33,49 @@ const placeholderBounds = useElementBounding(cardPlaceholder)
       />
     </div>
 
-    <div class="flex items-center p-4 pr-8 h-full w-[calc(100vw-25%)] shrink-0">
-      <section
-        class="border rounded-lg p-4 w-full shadow-xl shadow-red-500 aspect-video"
-        :style="{
-          boxShadow: bgShadowColor,
-        }"
+    <div class="flex items-center p-4 pr-8 h-full w-[calc(100vw-25%)] aspect-video shrink-0">
+      <Transition
+        leave-active-class="transition-all"
+        enter-active-class="transition-all"
+        leave-to-class="opacity-0"
+        enter-from-class="opacity-0"
       >
-        <h1>Main Content will be here.</h1>
-        <p>some fancy description</p>
-      </section>
+        <section
+          v-if="selected"
+          class="flex flex-col gap-4 justify-between border rounded-lg p-4 w-full aspect-video"
+          :style="{
+            boxShadow: bgShadowColor,
+          }"
+        >
+          <div>
+            <h1>
+              {{ selected.title }}
+            </h1>
+            <p class="text-neutral-400 text-sm">
+              {{ selected.description }}
+            </p>
+          </div>
+
+          <img
+            :src="selected.image"
+            class="rounded-lg max-h-full shadow object-cover"
+          >
+
+          <a
+            :href="selected.url"
+            target="_blank"
+            class="hover:bg-neutral-200 w-max p-1 rounded-lg"
+          >
+            <IconGithub />
+          </a>
+        </section>
+      </Transition>
     </div>
   </main>
 </template>
+
+<style>
+html {
+  font-family: Inter;
+}
+</style>
