@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { UseElementBoundingReturn } from '@vueuse/core'
+import { breakpointsTailwind, type UseElementBoundingReturn } from '@vueuse/core'
 import ColorThief from 'colorthief'
 import type { Card } from '~/types/card'
 
@@ -12,9 +12,6 @@ const modelValueItems = defineModel<Card[]>('items', { default: [] })
 
 const bgColor = useState('bg:color')
 
-const ITEM_WIDTH = 240 - 40
-const colorThief = new ColorThief()
-
 const modelValueElement = shallowRef<HTMLElement>()
 const modelValueElementAnimatedFromBounds = shallowRef({
   left: 0,
@@ -24,6 +21,10 @@ const modelValueElementAnimatedFromBounds = shallowRef({
 const container = useTemplateRef('container')
 const { width } = useWindowSize()
 const { width: containerWidth } = useElementSize(container)
+const breakpoints = useBreakpoints(breakpointsTailwind)
+
+const ITEM_WIDTH = computed(() => (breakpoints.greater('md').value ? 240 : 96 - 30))
+const colorThief = new ColorThief()
 
 const modelValueIndex = computed(() => {
   const i = modelValueItems.value.findIndex(item => item.id === modelValue.value?.id)
@@ -33,9 +34,10 @@ const modelValueIndex = computed(() => {
 
 const offset = computed(() => {
   const len = modelValue.value ? modelValueItems.value.length - 1 : modelValueItems.value.length
-  const wid = ITEM_WIDTH * len
+  const wid = ITEM_WIDTH.value * len
 
-  return (width.value - wid) / 2
+  // 16 is Padding
+  return ((width.value - wid) / 2) - (breakpoints.isSmaller('md') ? 16 : 0)
 })
 
 const toHtmlElement = (el: Element | EventTarget | null) => {
@@ -95,12 +97,12 @@ watch(width, () => {
 <template>
   <ol
     ref="container"
-    class="flex h-96"
+    class="h-40 md:h-96 overflow-hidden overflow-x-auto"
   >
     <li
       v-for="(item, index) in modelValueItems"
       :key="item.id"
-      class="absolute transition-all ease-out duration-300 perspective"
+      class="flex absolute transition-all ease-out duration-300 perspective"
       :style="{
         left: `${!modelValue ? getIndexOffset(index) * ITEM_WIDTH + offset : (containerWidth / 2 - ITEM_WIDTH / 2)}px`,
       }"

@@ -32,7 +32,7 @@ const style = computed<StyleValue>(() => {
 <template>
   <button
     ref="container"
-    class="w-60 aspect-[2/3] rounded-lg overflow-hidden transition-all ease-linear drop-shadow"
+    class="w-24 md:w-60 aspect-[2/3] rounded-lg overflow-hidden transition-all ease-linear drop-shadow"
     :style="style"
   >
     <img

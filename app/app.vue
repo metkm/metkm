@@ -15,14 +15,14 @@ const placeholderBounds = useElementBounding(cardPlaceholder)
 </script>
 
 <template>
-  <main class="flex overflow-hidden h-screen">
+  <main class="flex flex-col md:flex-row overflow-hidden min-h-screen">
     <div
-      class="relative flex flex-col justify-between p-4 pt-8 h-full w-screen shrink-0 transition-all duration-700"
-      :class="{ '!w-1/4': selected }"
+      class="relative flex flex-col gap-8 overflow-hidden justify-between p-4 pt-8 w-screen shrink-0 transition-all duration-700"
+      :class="{ 'md:!w-1/4': selected }"
     >
       <div
         ref="card:placeholder"
-        class="rounded-lg mx-auto bg-neutral-200 w-60 aspect-[2/3]"
+        class="rounded-lg mx-auto bg-neutral-200 w-24 md:w-60 aspect-[2/3]"
         :style="{ boxShadow: bgShadowColor }"
       />
 
@@ -33,7 +33,7 @@ const placeholderBounds = useElementBounding(cardPlaceholder)
       />
     </div>
 
-    <div class="flex items-center p-4 pr-8 h-full w-[calc(100vw-25%)] aspect-video shrink-0">
+    <div class="flex items-center p-4 md:pr-8 md:h-full md:w-[calc(100vw-25%)] aspect-video shrink-0">
       <Transition
         leave-active-class="transition-all"
         enter-active-class="transition-all"
