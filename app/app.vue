@@ -16,15 +16,24 @@ const placeholderBounds = useElementBounding(cardPlaceholder)
 
 <template>
   <main class="flex flex-col md:flex-row overflow-hidden min-h-screen">
+    <svg>
+      <filter id="grainy">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.65"
+        />
+      </filter>
+    </svg>
+
     <div
       class="relative flex flex-col gap-8 overflow-hidden justify-between p-4 pt-8 w-screen shrink-0 transition-all duration-700"
       :class="{ 'md:!w-1/4': selected }"
     >
       <div
         ref="card:placeholder"
-        class="rounded-lg mx-auto bg-neutral-200 w-24 md:w-60 aspect-[2/3]"
-        :style="{ boxShadow: bgShadowColor }"
+        class="rounded-lg mx-auto bg-white/20 w-24 md:w-60 aspect-[2/3]"
       />
+      <!-- :style="{ boxShadow: bgShadowColor }" -->
 
       <TheCards
         v-model="selected"
@@ -42,7 +51,7 @@ const placeholderBounds = useElementBounding(cardPlaceholder)
       >
         <section
           v-if="selected"
-          class="flex flex-col gap-4 justify-between border rounded-lg p-4 w-full aspect-video"
+          class="flex flex-col gap-4 justify-between rounded-lg p-4 w-full aspect-video"
           :style="{
             boxShadow: bgShadowColor,
           }"
@@ -77,5 +86,17 @@ const placeholderBounds = useElementBounding(cardPlaceholder)
 <style>
 html {
   font-family: Inter;
+  background-color: #EADBC8;
+}
+
+#__nuxt::after {
+  content: '';
+  inset: 0;
+  position: absolute;
+  background: #000000;
+  opacity: 25%;
+  filter: url(#grainy);
+  z-index: 50;
+  pointer-events: none;
 }
 </style>
