@@ -73,5 +73,5 @@ void main() {
   color = vec3(step(billow, st_mid + 0.035));
 
   color = mix(targetColor, vec3(0.0), color);
-  gl_FragColor = vec4(color, 1.0);
+  gl_FragColor = vec4(color / 2.0, 1.0);
 }
