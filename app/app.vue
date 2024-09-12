@@ -25,6 +25,8 @@ const placeholderBounds = useElementBounding(cardPlaceholder)
       </filter>
     </svg>
 
+    <TheCanvas />
+
     <div
       class="relative flex flex-col gap-8 overflow-hidden justify-between p-4 pt-8 w-screen shrink-0 transition-all duration-700"
       :class="{ 'md:!w-1/4': selected }"
@@ -87,6 +89,7 @@ const placeholderBounds = useElementBounding(cardPlaceholder)
 html {
   font-family: Inter;
   background-color: #EADBC8;
+  color: white;
 }
 
 #__nuxt::after {
