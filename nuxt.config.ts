@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/fonts',
     '@tresjs/nuxt',
+    '@vueuse/nuxt',
   ],
   eslint: {
     config: {

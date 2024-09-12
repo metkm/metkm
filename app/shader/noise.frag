@@ -1,4 +1,5 @@
 uniform vec2 resolution;
+uniform vec3 targetColor;
 uniform float time;
 
 vec2 quintic(vec2 p) {
@@ -71,6 +72,6 @@ void main() {
   float st_mid = (st_low + st_high) / 4.0; // or divide by 2
   color = vec3(step(billow, st_mid + 0.035));
 
-  color = mix(vec3(0.35, 0.12, 0.71), vec3(0.0), color);
+  color = mix(targetColor, vec3(0.0), color);
   gl_FragColor = vec4(color, 1.0);
 }
