@@ -5,9 +5,11 @@ const height = window.innerHeight
 
 <template>
   <div class="absolute flex flex-col inset-0 pointer-events-none -z-50">
-    <p class="text-on-primary text-8xl font-bold font-serif mx-auto scale-[1.8] tracking-widest">
-      PROJECTS
-    </p>
+    <div class="flex items-center w-full overflow-hidden flex-1">
+      <p class="text-on-primary text-3xl lg:text-8xl font-bold font-serif mx-auto scale-[1.8] tracking-widest">
+        PROJECTS
+      </p>
+    </div>
 
     <TresCanvas class="!h-3/4 flex-1">
       <TresOrthographicCamera
