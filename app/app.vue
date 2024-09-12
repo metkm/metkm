@@ -1,21 +1,16 @@
 <script setup lang="ts">
-import type { RGBColor } from 'colorthief'
 import { imagesWithIds } from './constants'
 import type { Card } from './types/card'
 
 const selected = ref<Card>()
 const items = ref(imagesWithIds)
-
-const bgColor = useState<RGBColor | undefined>('bg:color')
-
-const bgShadowColor = computed(() => `0 20px 25px -5px rgba(${bgColor.value?.join(',')}, 0.2), 0 8px 10px -6px rgba(${bgColor.value?.join(',')}, 0.2)`)
-
-const cardPlaceholder = useTemplateRef('card:placeholder')
-const placeholderBounds = useElementBounding(cardPlaceholder)
 </script>
 
 <template>
-  <main class="flex flex-col md:flex-row overflow-hidden min-h-screen">
+  <main
+    class="grid grid-rows-[1fr_0fr] lg:grid-cols-[1fr_0fr] max-h-lvh min-h-lvh overflow-hidden transition-all duration-500"
+    :class="{ 'lg:grid-cols-[1fr_1fr] lg:!grid-rows-1 !grid-rows-[1fr_1fr]': selected }"
+  >
     <svg class="absolute -z-50">
       <filter id="grainy">
         <feTurbulence
@@ -24,27 +19,31 @@ const placeholderBounds = useElementBounding(cardPlaceholder)
         />
       </filter>
     </svg>
-
     <TheCanvas />
 
-    <div
-      class="relative flex flex-col gap-8 overflow-hidden justify-between p-4 pt-8 w-screen shrink-0 transition-all duration-700"
-      :class="{ 'md:!w-1/4': selected }"
-    >
-      <div
-        ref="card:placeholder"
-        class="rounded-lg mx-auto bg-white/20 w-24 md:w-60 aspect-[2/3]"
-      />
-      <!-- :style="{ boxShadow: bgShadowColor }" -->
+    <div class="flex flex-col justify-center items-center pt-4 overflow-hidden max-w-screen gap-4 lg:gap-8">
+      <TransitionGroup
+        move-class="transition-all"
+        leave-active-class="absolute"
+        enter-from-class="opacity-0 !translate-y-[calc(100%-25%)]"
+        leave-to-class="opacity-0"
+        enter-to-class="translate-y-0"
+      >
+        <TheCard
+          v-if="selected"
+          :key="1"
+          :item="selected"
+        />
 
-      <TheCards
-        v-model="selected"
-        v-model:items="items"
-        :target-bounds="placeholderBounds"
-      />
+        <TheCards
+          :key="2"
+          v-model="selected"
+          v-model:items="items"
+        />
+      </TransitionGroup>
     </div>
 
-    <div class="flex items-center p-4 md:pr-8 md:h-full md:w-[calc(100vw-25%)] aspect-video shrink-0">
+    <div class="flex items-center min-w-0 min-h-0 transition-all">
       <Transition
         leave-active-class="transition-all"
         enter-active-class="transition-all"
@@ -53,10 +52,7 @@ const placeholderBounds = useElementBounding(cardPlaceholder)
       >
         <section
           v-if="selected"
-          class="flex flex-col gap-4 justify-between rounded-lg p-4 w-full aspect-video"
-          :style="{
-            boxShadow: bgShadowColor,
-          }"
+          class="flex flex-col gap-2 lg:gap-4 justify-between rounded-lg p-2 lg:p-4 w-full aspect-video"
         >
           <div>
             <h1>

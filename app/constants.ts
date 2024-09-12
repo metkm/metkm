@@ -1,5 +1,7 @@
 import type { Card } from './types/card'
 
+export const defaultBackground = [89.25, 30.6, 181.05]
+
 export const images: Omit<Card, 'id'>[] = [
   {
     title: 'Capybara',

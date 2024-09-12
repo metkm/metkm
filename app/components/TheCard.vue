@@ -2,9 +2,9 @@
 import type { StyleValue } from 'vue'
 import type { Card } from '~/types/card'
 
-const { index } = defineProps<{
+const { index = 1 } = defineProps<{
   item: Card
-  index: number
+  index?: number
 }>()
 
 const container = useTemplateRef('container')
@@ -24,7 +24,7 @@ const style = computed<StyleValue>(() => {
 
   return {
     ...baseStyle,
-    transform: `rotateX(${tilt.value * 10}deg) rotateY(${roll.value * 10}deg) rotateZ(${index}deg) translateY(${randomY}px)`,
+    transform: `rotateX(${tilt.value * 10}deg) rotateY(${roll.value * 10}deg) rotateZ(${index}deg)`,
   }
 })
 </script>
@@ -32,7 +32,7 @@ const style = computed<StyleValue>(() => {
 <template>
   <button
     ref="container"
-    class="w-24 md:w-60 aspect-[2/3] rounded-lg overflow-hidden transition-all ease-linear drop-shadow"
+    class="w-24 md:w-40 lg:w-60 aspect-[2/3] rounded-lg overflow-hidden transition-all ease-linear drop-shadow"
     :style="style"
   >
     <img
