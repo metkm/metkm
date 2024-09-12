@@ -31,30 +31,24 @@ const handleSelect = (event: Event, item: Card) => {
 </script>
 
 <template>
-  <div>
-    <h1 class="text-lg font-semibold">
-      Projects
-    </h1>
-
-    <ol
-      class="flex px-8 p-4 duration-500 transition-all"
-      :class="{ 'mx-auto w-full lg:w-max overflow-x-auto lg:overflow-x-visible': !modelValue }"
+  <ol
+    class="flex px-8 p-4 duration-500 transition-all"
+    :class="{ 'mx-auto w-full lg:w-max overflow-x-auto lg:overflow-x-visible': !modelValue }"
+  >
+    <li
+      v-for="(item, index) in modelValueItems"
+      :key="item.id"
+      class="flex justify-center perspective grow-1 w-20 md:w-24 lg:w-32 overflow-visible duration-500 transition-all"
+      :class="{ '!w-1': modelValue }"
     >
-      <li
-        v-for="(item, index) in modelValueItems"
-        :key="item.id"
-        class="flex justify-center perspective grow-1 w-20 md:w-24 lg:w-32 overflow-visible duration-500 transition-all"
-        :class="{ '!w-1': modelValue }"
-      >
-        <TheCard
-          :item="item"
-          :index="index - (modelValueItems.length / 2)"
-          class="mx-auto shrink-0"
-          @click="handleSelect($event, item)"
-        />
-      </li>
-    </ol>
-  </div>
+      <TheCard
+        :item="item"
+        :index="index - (modelValueItems.length / 2)"
+        class="mx-auto shrink-0"
+        @click="handleSelect($event, item)"
+      />
+    </li>
+  </ol>
 </template>
 
 <style>

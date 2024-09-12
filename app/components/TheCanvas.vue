@@ -4,7 +4,22 @@ const height = window.innerHeight
 </script>
 
 <template>
-  <div class="absolute flex items-center inset-0 pointer-events-none -z-50">
+  <div class="absolute flex flex-col inset-0 pointer-events-none -z-50">
+    <p class="text-on-primary text-8xl font-bold font-serif mx-auto scale-[1.8] tracking-widest">
+      PROJECTS
+    </p>
+
+    <TresCanvas class="!h-3/4 flex-1">
+      <TresOrthographicCamera
+        :args="[width / -2, width / 2, height / 2, height / -2, 1, 1000]"
+        :position="[0, 0, 1]"
+      />
+
+      <TheNoise />
+    </TresCanvas>
+
+    <div class="flex-1" />
+
     <svg class="absolute -z-50">
       <filter id="grainy">
         <feTurbulence
@@ -13,15 +28,6 @@ const height = window.innerHeight
         />
       </filter>
     </svg>
-
-    <TresCanvas class="!h-3/4">
-      <TresOrthographicCamera
-        :args="[width / -2, width / 2, height / 2, height / -2, 1, 1000]"
-        :position="[0, 0, 1]"
-      />
-
-      <TheNoise />
-    </TresCanvas>
   </div>
 </template>
 

@@ -15,6 +15,9 @@ export default defineNuxtConfig({
       stylistic: true,
     },
   },
+  tailwindcss: {
+    configPath: './tailwind.config.ts',
+  },
   future: {
     compatibilityVersion: 4,
   },
