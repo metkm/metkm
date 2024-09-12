@@ -23,7 +23,7 @@ const { width } = useWindowSize()
 const { width: containerWidth } = useElementSize(container)
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
-const ITEM_WIDTH = computed(() => (breakpoints.greater('md').value ? 240 : 96 - 30))
+const ITEM_WIDTH = computed(() => (breakpoints.greater('md').value ? 240 - 30 : 96 - 30))
 const colorThief = new ColorThief()
 
 const modelValueIndex = computed(() => {
