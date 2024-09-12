@@ -16,7 +16,7 @@ const placeholderBounds = useElementBounding(cardPlaceholder)
 
 <template>
   <main class="flex flex-col md:flex-row overflow-hidden min-h-screen">
-    <svg>
+    <svg class="absolute -z-50">
       <filter id="grainy">
         <feTurbulence
           type="fractalNoise"
