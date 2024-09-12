@@ -11,21 +11,12 @@ const items = ref(imagesWithIds)
     class="grid grid-rows-[1fr_0fr] lg:grid-cols-[1fr_0fr] max-h-lvh min-h-lvh overflow-hidden transition-all duration-500"
     :class="{ 'lg:grid-cols-[1fr_1fr] lg:!grid-rows-1 !grid-rows-[1fr_1fr]': selected }"
   >
-    <svg class="absolute -z-50">
-      <filter id="grainy">
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="0.65"
-        />
-      </filter>
-    </svg>
     <TheCanvas />
 
     <div class="flex flex-col justify-center items-center pt-4 overflow-hidden max-w-screen gap-4 lg:gap-8">
       <TransitionGroup
         move-class="transition-all"
         leave-active-class="absolute"
-        enter-from-class="opacity-0 !translate-y-[calc(100%-25%)]"
         leave-to-class="opacity-0"
         enter-to-class="translate-y-0"
       >
@@ -86,16 +77,5 @@ html {
   font-family: Inter;
   background-color: #EADBC8;
   color: white;
-}
-
-#__nuxt::after {
-  content: '';
-  inset: 0;
-  position: absolute;
-  background: #000000;
-  opacity: 25%;
-  filter: url(#grainy);
-  z-index: 50;
-  pointer-events: none;
 }
 </style>
