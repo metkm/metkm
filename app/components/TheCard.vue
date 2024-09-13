@@ -1,9 +1,9 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import type { RGBColor } from 'colorthief'
 import type { StyleValue } from 'vue'
 import type { Card } from '~/types/card'
 
-const { index = 1 } = defineProps<{
+const { index = 1, item } = defineProps<{
   item: Card
   index?: number
 }>()
@@ -52,16 +52,26 @@ onMounted(() => {
     color.value = getColor(imageElement.value!)
   })
 })
+
+const Char = defineComponent(() => {
+  return () => (
+    <div class="flex flex-col items-center">
+      <p>{ item.title.at(0) }</p>
+
+      <div class="size-2 lg:size-3 bg-black rotate-45" />
+    </div>
+  )
+})
 </script>
 
 <template>
   <button
     ref="container"
-    class="grid *:col-start-1 *:row-start-1 w-24 md:w-40 lg:w-60 aspect-[2/3] rounded-lg overflow-hidden transition-all ease-linear p-3 font-serif font-bold text-2xl bg-primary text-black border-2 border-on-primary drop-shadow-lg"
+    class="grid *:col-start-1 *:row-start-1 w-28 md:w-40 lg:w-60 aspect-[2/3] rounded-lg overflow-hidden transition-all ease-linear p-2 lg:p-3 font-serif font-bold text-xs lg:text-2xl bg-primary text-black border-2 border-on-primary drop-shadow-lg"
     :style="style"
     @click="bgColor = getColor(imageElement!)"
   >
-    <div class="h-full w-full p-9">
+    <div class="h-full w-full p-5 lg:p-9">
       <img
         ref="image"
         :src="item.image"
@@ -70,20 +80,7 @@ onMounted(() => {
       >
     </div>
 
-    <div class="flex flex-col items-center place-self-start">
-      <p>
-        {{ item.title.at(0) }}
-      </p>
-
-      <div class="size-3 bg-black rotate-45" />
-    </div>
-
-    <div class="flex flex-col items-center place-self-end rotate-180">
-      <p>
-        {{ item.title.at(0) }}
-      </p>
-
-      <div class="size-3 bg-black rotate-45" />
-    </div>
+    <Char class="place-self-start" />
+    <Char class="place-self-end rotate-180" />
   </button>
 </template>
