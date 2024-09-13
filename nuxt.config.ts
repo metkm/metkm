@@ -15,6 +15,16 @@ export default defineNuxtConfig({
       stylistic: true,
     },
   },
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'icon',
+          href: '/favicon.svg',
+        },
+      ],
+    },
+  },
   tailwindcss: {
     configPath: './tailwind.config.ts',
   },
