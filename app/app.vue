@@ -16,15 +16,17 @@ const items = ref(imagesWithIds)
     <div class="flex flex-col justify-center items-center pt-4 overflow-hidden max-w-screen gap-4 lg:gap-8">
       <TransitionGroup
         move-class="transition-all"
-        leave-active-class="absolute"
-        leave-to-class="opacity-0"
-        enter-to-class="translate-y-0"
+        leave-active-class="absolute transition-all duration-500"
+        enter-active-class="transition-all duration-500"
+        leave-to-class="!translate-y-14 !opacity-0"
+        enter-from-class="!translate-y-14 !opacity-0"
       >
-        <TheCard
+        <div
           v-if="selected"
           :key="1"
-          :item="selected"
-        />
+        >
+          <TheCard :item="selected" />
+        </div>
 
         <TheCards
           :key="2"
