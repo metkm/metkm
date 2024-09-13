@@ -8,7 +8,7 @@ const items = ref(imagesWithIds)
 
 <template>
   <main
-    class="grid grid-rows-[1fr_0fr] lg:grid-cols-[1fr_0fr] max-h-lvh min-h-lvh overflow-hidden transition-all duration-500"
+    class="grid grid-rows-[1fr_0fr] lg:grid-cols-[1fr_0fr] lg:max-h-lvh min-h-lvh overflow-hidden transition-all duration-500"
     :class="{ 'lg:grid-cols-[1fr_1fr] lg:!grid-rows-1 !grid-rows-[1fr_1fr]': selected }"
   >
     <TheCanvas />
@@ -45,16 +45,20 @@ const items = ref(imagesWithIds)
       >
         <section
           v-if="selected"
-          class="flex flex-col gap-2 lg:gap-4 justify-between rounded-lg p-2 lg:p-4 w-full aspect-video"
+          class="text-neutral-100 flex flex-col gap-2 lg:gap-4 justify-between rounded-lg p-2 lg:p-4 w-full aspect-video"
         >
           <div>
             <h1>
               {{ selected.title }}
             </h1>
             <p class="text-neutral-400 text-sm">
-              {{ selected.description }}
+              {{ selected.smallDescription }}
             </p>
           </div>
+
+          <p class="text-neutral-100">
+            {{ selected.description }}
+          </p>
 
           <img
             :src="selected.image"
@@ -70,6 +74,14 @@ const items = ref(imagesWithIds)
           </a>
         </section>
       </Transition>
+    </div>
+
+    <div class="lg:absolute left-4 bottom-4 p-4 font-bold text-on-primary font-serif flex flex-col self-start">
+      <p>
+        Me:
+      </p>
+      <a href="https://github.com/metkm">Github - metkm</a>
+      <a href="https://www.linkedin.com/in/metkm/">LinkedIn</a>
     </div>
   </main>
 </template>
