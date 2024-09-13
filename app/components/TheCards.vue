@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ColorThief from 'colorthief'
 import { defaultBackground } from '~/constants'
 import type { Card } from '~/types/card'
 
@@ -7,9 +6,8 @@ const modelValue = defineModel<Card>()
 const modelValueItems = defineModel<Card[]>('items', { default: [] })
 
 const bgColor = useState('bg:color')
-const colorThief = new ColorThief()
 
-const handleSelect = (event: Event, item: Card) => {
+const handleSelect = (item: Card) => {
   if (modelValue.value) {
     modelValueItems.value.push(modelValue.value)
     modelValue.value = undefined
@@ -17,9 +15,6 @@ const handleSelect = (event: Event, item: Card) => {
     bgColor.value = defaultBackground
     return
   }
-
-  const imgElement = event.target as HTMLImageElement
-  bgColor.value = colorThief.getColor(imgElement)
 
   const index = modelValueItems.value.findIndex(i => i.id === item.id)
   if (index !== -1) {
@@ -42,10 +37,11 @@ const handleSelect = (event: Event, item: Card) => {
       :class="{ '!w-1': modelValue }"
     >
       <TheCard
+        :key="index"
         :item="item"
         :index="index - (modelValueItems.length / 2)"
         class="mx-auto shrink-0"
-        @click="handleSelect($event, item)"
+        @click="handleSelect(item)"
       />
     </li>
   </ol>

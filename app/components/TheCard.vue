@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { RGBColor } from 'colorthief'
 import type { StyleValue } from 'vue'
 import type { Card } from '~/types/card'
 
@@ -7,9 +8,25 @@ const { index = 1 } = defineProps<{
   index?: number
 }>()
 
+const _color = ref<RGBColor | null>()
+const color = computed({
+  get() {
+    if (!_color.value) return
+
+    return `rgb(${_color.value?.[0]}, ${_color.value?.[1]}, ${_color.value?.[2]})`
+  },
+  set(val: RGBColor | null) {
+    _color.value = val
+  },
+})
+
 const container = useTemplateRef('container')
+const imageElement = useTemplateRef('image')
+
 const { tilt, roll } = useParallax(container)
 const { isOutside } = useMouseInElement(container)
+
+const bgColor = useState('bg:color')
 
 const randomY = Math.random() * -10
 
@@ -27,17 +44,46 @@ const style = computed<StyleValue>(() => {
     transform: `rotateX(${tilt.value * 10}deg) rotateY(${roll.value * 10}deg) rotateZ(${index}deg)`,
   }
 })
+
+onMounted(() => {
+  if (!imageElement.value) return
+
+  imageElement.value.addEventListener('load', () => {
+    color.value = getColor(imageElement.value!)
+  })
+})
 </script>
 
 <template>
   <button
     ref="container"
-    class="w-24 md:w-40 lg:w-60 aspect-[2/3] rounded-lg overflow-hidden transition-all ease-linear drop-shadow"
+    class="grid *:col-start-1 *:row-start-1 w-24 md:w-40 lg:w-60 aspect-[2/3] rounded-lg overflow-hidden transition-all ease-linear p-3 font-serif font-bold text-2xl bg-primary text-black border-2 border-on-primary drop-shadow-lg"
     :style="style"
+    @click="bgColor = getColor(imageElement!)"
   >
-    <img
-      :src="item.image"
-      class="w-full h-full object-cover"
-    >
+    <div class="h-full w-full p-9">
+      <img
+        ref="image"
+        :src="item.image"
+        class="w-full h-full object-cover outline-4 outline outline-black outline-offset-4"
+        :style="{ outlineColor: color }"
+      >
+    </div>
+
+    <div class="flex flex-col items-center place-self-start">
+      <p>
+        {{ item.title.at(0) }}
+      </p>
+
+      <div class="size-3 bg-black rotate-45" />
+    </div>
+
+    <div class="flex flex-col items-center place-self-end rotate-180">
+      <p>
+        {{ item.title.at(0) }}
+      </p>
+
+      <div class="size-3 bg-black rotate-45" />
+    </div>
   </button>
 </template>
