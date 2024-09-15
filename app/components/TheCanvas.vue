@@ -6,19 +6,15 @@
       </p>
     </div>
 
-    <ClientOnly>
-      <TresCanvas class="!h-3/4 flex-1">
+    <div class="h-3/4 bg-on-primary">
+      <TresCanvas class="!h-full flex-1">
         <TresOrthographicCamera
           :position="[0, 0, 1]"
         />
 
         <TheNoise />
       </TresCanvas>
-
-      <template #fallback>
-        <div class="h-3/4 bg-on-primary" />
-      </template>
-    </ClientOnly>
+    </div>
 
     <div class="flex-1" />
 
