@@ -1,8 +1,3 @@
-<script setup lang="ts">
-const width = window.innerWidth
-const height = window.innerHeight
-</script>
-
 <template>
   <div class="absolute flex flex-col inset-0 pointer-events-none -z-50">
     <div class="flex items-center w-full overflow-hidden flex-1">
@@ -11,14 +6,19 @@ const height = window.innerHeight
       </p>
     </div>
 
-    <TresCanvas class="!h-3/4 flex-1">
-      <TresOrthographicCamera
-        :args="[width / -2, width / 2, height / 2, height / -2, 1, 1000]"
-        :position="[0, 0, 1]"
-      />
+    <ClientOnly>
+      <TresCanvas class="!h-3/4 flex-1">
+        <TresOrthographicCamera
+          :position="[0, 0, 1]"
+        />
 
-      <TheNoise />
-    </TresCanvas>
+        <TheNoise />
+      </TresCanvas>
+
+      <template #fallback>
+        <div class="h-3/4 bg-on-primary" />
+      </template>
+    </ClientOnly>
 
     <div class="flex-1" />
 

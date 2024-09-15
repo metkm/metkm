@@ -1,7 +1,12 @@
 import ColorThief from 'colorthief'
 
-const colorThief = new ColorThief()
+let thief: ColorThief | undefined = undefined
+const getThief = () => {
+  if (thief) return thief
+
+  thief = new ColorThief()
+}
 
 export const getColor = (element: HTMLImageElement) => {
-  return colorThief.getColor(element)
+  return getThief()?.getColor(element) || undefined
 }

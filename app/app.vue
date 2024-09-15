@@ -24,7 +24,13 @@ const items = ref(imagesWithIds)
     class="grid grid-rows-[1fr_0fr] lg:grid-cols-[1fr_0fr] lg:max-h-lvh min-h-lvh overflow-hidden transition-all duration-500"
     :class="{ 'lg:grid-cols-[1fr_1fr] lg:!grid-rows-1 !grid-rows-[1fr_1fr]': selected }"
   >
+    <!-- <ClientOnly> -->
     <TheCanvas />
+
+    <!-- <template #fallback>
+        <div class="h-3/4 flex-1 bg-on-primary" />
+      </template>
+    </ClientOnly> -->
 
     <div class="flex flex-col justify-center items-center pt-4 overflow-hidden max-w-screen gap-4 lg:gap-8">
       <TransitionGroup

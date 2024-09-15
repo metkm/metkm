@@ -8,14 +8,14 @@ const { index = 1, item } = defineProps<{
   index?: number
 }>()
 
-const _color = ref<RGBColor | null>()
+const _color = ref<RGBColor | undefined>()
 const color = computed({
   get() {
     if (!_color.value) return
 
     return `rgb(${_color.value?.[0]}, ${_color.value?.[1]}, ${_color.value?.[2]})`
   },
-  set(val: RGBColor | null) {
+  set(val: RGBColor | undefined) {
     _color.value = val
   },
 })
@@ -28,7 +28,7 @@ const { isOutside } = useMouseInElement(container)
 
 const bgColor = useState('bg:color')
 
-const randomY = Math.random() * -10
+const randomY = useState(() => Math.random() * -10)
 
 const style = computed<StyleValue>(() => {
   const baseStyle: StyleValue = {
@@ -53,6 +53,11 @@ onMounted(() => {
   })
 })
 
+const handleClick = () => {
+  if (!imageElement.value) return
+  bgColor.value = getColor(imageElement.value)
+}
+
 const Char = defineComponent(() => {
   return () => (
     <div class="flex flex-col items-center">
@@ -69,7 +74,7 @@ const Char = defineComponent(() => {
     ref="container"
     class="grid *:col-start-1 *:row-start-1 w-28 md:w-40 lg:w-60 aspect-[2/3] rounded-lg overflow-hidden transition-all ease-linear p-2 lg:p-3 font-serif font-bold text-xs lg:text-2xl bg-primary text-black border-2 border-on-primary drop-shadow-lg"
     :style="style"
-    @click="bgColor = getColor(imageElement!)"
+    @click="handleClick"
   >
     <div class="h-full w-full p-5 lg:p-9">
       <img
