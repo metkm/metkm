@@ -41,7 +41,7 @@ const handleSelect = (item: Card) => {
         :item="item"
         :index="index - (modelValueItems.length / 2)"
         class="mx-auto shrink-0"
-        @click="handleSelect(item)"
+        @click="item.href ? undefined : handleSelect(item)"
       />
     </li>
   </ol>

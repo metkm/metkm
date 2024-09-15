@@ -30,8 +30,18 @@ const bgColor = useState('bg:color')
 const randomY = useState('rand', () => Math.random() * -10)
 
 const style = computed<StyleValue>(() => {
+  const aElementStyle: StyleValue | undefined = item.href
+    ? {
+        backgroundColor: color.value,
+        color: 'white',
+        border: '1px solid white',
+        ...item.extraStyle as object,
+      }
+    : undefined
+
   const baseStyle: StyleValue = {
     transform: `translateY(${randomY.value}px) rotateZ(${index}deg)`,
+    ...aElementStyle,
   }
 
   if (isOutside.value) {
@@ -44,10 +54,9 @@ const style = computed<StyleValue>(() => {
   }
 })
 
-onMounted(() => {
+onMounted(async () => {
   if (!imageElement.value) return
-
-  color.value = getColor(imageElement.value!)
+  color.value = await getColor(imageElement.value)
 })
 
 const handleClick = () => {
@@ -58,20 +67,36 @@ const handleClick = () => {
 const Char = defineComponent(() => {
   return () => (
     <div class="flex flex-col items-center">
-      <p>{ item.title.at(0) }</p>
+      <p>{item.title.at(0)}</p>
 
       <div class="size-2 lg:size-3 bg-black rotate-45" />
     </div>
   )
 })
+
+const Component = defineComponent((props, ctx) => {
+  const tag = item.href ? 'a' : 'button'
+
+  return () =>
+    h(
+      tag,
+      tag === 'a'
+        ? { ...props, onClick: undefined, href: item.href, target: '_blank' }
+        : {
+            onClick: handleClick,
+            ...props,
+          },
+      ctx.slots,
+    )
+})
 </script>
 
 <template>
-  <button
+  <component
+    :is="Component"
     ref="container"
     class="grid *:col-start-1 *:row-start-1 w-28 md:w-40 lg:w-60 aspect-[2/3] rounded-lg overflow-hidden transition-all ease-linear p-2 lg:p-3 font-serif font-bold text-xs lg:text-2xl bg-primary text-black border-2 border-on-primary drop-shadow-lg"
     :style="style"
-    @click="handleClick"
   >
     <div class="h-full w-full p-5 lg:p-9">
       <img
@@ -84,5 +109,5 @@ const Char = defineComponent(() => {
 
     <Char class="place-self-start" />
     <Char class="place-self-end rotate-180" />
-  </button>
+  </component>
 </template>

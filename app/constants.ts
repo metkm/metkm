@@ -2,7 +2,25 @@ import type { Card } from './types/card'
 
 export const defaultBackground = [89.25, 30.6, 181.05]
 
-export const images: Omit<Card, 'id'>[] = [
+export const cards: Omit<Card, 'id'>[] = [
+  {
+    title: 'Github',
+    image: '/images/github.webp',
+    url: 'https://github.com/metkm',
+    href: 'https://github.com/metkm',
+    extraStyle: {
+      filter: 'blur(2px)',
+    },
+  },
+  {
+    title: 'LinkedIn',
+    image: '/images/linkedin.webp',
+    url: 'https://www.linkedin.com/in/metkm/',
+    href: 'https://www.linkedin.com/in/metkm/',
+    extraStyle: {
+      filter: 'grayscale(100%)',
+    },
+  },
   {
     title: 'Capybara',
     smallDescription: 'Made with Threejs',
@@ -39,7 +57,7 @@ export const images: Omit<Card, 'id'>[] = [
   },
 ]
 
-export const imagesWithIds: Array<Card> = images.map((image) => {
+export const cardsWithIds: Array<Card> = cards.map((image) => {
   const id = crypto.randomUUID()
 
   return {

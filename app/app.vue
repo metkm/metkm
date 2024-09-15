@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { imagesWithIds } from './constants'
+import { cardsWithIds } from './constants'
 import type { Card } from './types/card'
 
 useSeoMeta({
@@ -16,7 +16,7 @@ useSeoMeta({
 })
 
 const selected = ref<Card>()
-const items = ref(imagesWithIds)
+const items = ref(cardsWithIds)
 </script>
 
 <template>
