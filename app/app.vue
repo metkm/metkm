@@ -2,6 +2,19 @@
 import { imagesWithIds } from './constants'
 import type { Card } from './types/card'
 
+useSeoMeta({
+  title: 'Metin Korkmaz',
+  description: 'Metin\'s portfolio',
+  ogTitle: 'Metin Korkmaz',
+  ogImage: '/preview.webp',
+  ogDescription: 'Metin\'s portfolio',
+  ogUrl: 'https://metkm.win/',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Metin Korkmaz',
+  twitterDescription: 'Metin\'s portfolio',
+  twitterImage: '/preview.webp',
+})
+
 const selected = ref<Card>()
 const items = ref(imagesWithIds)
 </script>
