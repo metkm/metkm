@@ -27,12 +27,11 @@ const { tilt, roll } = useParallax(container)
 const { isOutside } = useMouseInElement(container)
 
 const bgColor = useState('bg:color')
-
-const randomY = useState(() => Math.random() * -10)
+const randomY = useState('rand', () => Math.random() * -10)
 
 const style = computed<StyleValue>(() => {
   const baseStyle: StyleValue = {
-    transform: `translateY(${randomY}px) rotateZ(${index}deg)`,
+    transform: `translateY(${randomY.value}px) rotateZ(${index}deg)`,
   }
 
   if (isOutside.value) {
@@ -48,9 +47,7 @@ const style = computed<StyleValue>(() => {
 onMounted(() => {
   if (!imageElement.value) return
 
-  imageElement.value.addEventListener('load', () => {
-    color.value = getColor(imageElement.value!)
-  })
+  color.value = getColor(imageElement.value!)
 })
 
 const handleClick = () => {
@@ -80,7 +77,7 @@ const Char = defineComponent(() => {
       <img
         ref="image"
         :src="item.image"
-        class="w-full h-full object-cover outline-4 outline outline-black outline-offset-4"
+        class="w-full h-full object-cover outline-4 outline outline-black transition-all outline-offset-4"
         :style="{ outlineColor: color }"
       >
     </div>
