@@ -8,18 +8,12 @@ export const cards: Omit<Card, 'id'>[] = [
     image: '/images/github.webp',
     url: 'https://github.com/metkm',
     href: 'https://github.com/metkm',
-    extraStyle: {
-      filter: 'blur(2px)',
-    },
   },
   {
     title: 'LinkedIn',
     image: '/images/linkedin.webp',
     url: 'https://www.linkedin.com/in/metkm/',
     href: 'https://www.linkedin.com/in/metkm/',
-    extraStyle: {
-      filter: 'grayscale(100%)',
-    },
   },
   {
     title: 'Capybara',

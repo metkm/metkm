@@ -35,7 +35,6 @@ const style = computed<StyleValue>(() => {
         backgroundColor: color.value,
         color: 'white',
         border: '1px solid white',
-        ...item.extraStyle as object,
       }
     : undefined
 
