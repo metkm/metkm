@@ -93,7 +93,7 @@ const items = ref(cardsWithIds)
       <p>
         Me:
       </p>
-      <a href="https://github.com/metkm">Github - metkm</a>
+      <a href="https://github.com/metkm">Github</a>
       <a href="https://www.linkedin.com/in/metkm/">LinkedIn</a>
     </div>
   </main>
