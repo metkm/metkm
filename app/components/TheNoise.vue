@@ -8,7 +8,7 @@ const width = window.innerWidth
 const height = window.innerHeight
 
 const { onLoop } = useRenderLoop()
-const bgColor = useState<number[]>('bg:color', () => defaultBackground)
+const bgColor = useState('bg:color', () => defaultBackground)
 
 const output = useTransition(bgColor)
 

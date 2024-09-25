@@ -7,7 +7,25 @@ const modelValueItems = defineModel<Card[]>('items', { default: [] })
 
 const bgColor = useState('bg:color')
 
+const updateImage = (url: string) => {
+  const img = new Image()
+  img.src = url
+
+  img.addEventListener('load', async () => {
+    if (!modelValue.value) {
+      bgColor.value = defaultBackground
+    }
+    else {
+      bgColor.value = (await getColor(img))?.value
+    }
+  }, {
+    once: true,
+  })
+}
+
 const handleSelect = (item: Card) => {
+  updateImage(item.image)
+
   if (modelValue.value) {
     modelValueItems.value.push(modelValue.value)
     modelValue.value = undefined

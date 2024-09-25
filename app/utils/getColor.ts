@@ -1,24 +1,25 @@
-import ColorThief, { type RGBColor } from 'colorthief'
+import { FastAverageColor } from 'fast-average-color'
 
-let thief: ColorThief | undefined = undefined
+let avgColor: FastAverageColor | undefined = undefined
+
 const getThief = () => {
-  if (thief) return thief
+  if (avgColor) return avgColor
 
-  thief = new ColorThief()
-  return thief
+  avgColor = new FastAverageColor()
+  return avgColor
 }
 
 export const getColor = async (element: HTMLImageElement) => {
-  const t = getThief()
-  if (!t) return
+  const res = getThief()
+  if (!res) return
 
-  return new Promise<RGBColor | undefined>((resolve) => {
+  return new Promise<ReturnType<FastAverageColor['getColor']>>((resolve) => {
     if (element.complete) {
-      resolve(t.getColor(element) || undefined)
+      resolve(res!.getColor(element))
     }
     else {
       element.addEventListener('load', () => {
-        resolve(t.getColor(element) || undefined)
+        resolve(res!.getColor(element))
       })
     }
   })

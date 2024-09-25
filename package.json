@@ -14,7 +14,7 @@
     "@nuxt/fonts": "^0.7.2",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@tresjs/nuxt": "^3.0.7",
-    "colorthief": "^2.4.0",
+    "fast-average-color": "^9.4.0",
     "nuxt": "^3.13.0",
     "three": "^0.168.0",
     "vue": "latest"

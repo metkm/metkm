@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import type { RGBColor } from 'colorthief'
+import type { FastAverageColorResult } from 'fast-average-color'
 import type { StyleValue } from 'vue'
 import type { Card } from '~/types/card'
 
@@ -8,17 +8,7 @@ const { index = 1, item } = defineProps<{
   index?: number
 }>()
 
-const _color = ref<RGBColor | undefined>()
-const color = computed({
-  get() {
-    if (!_color.value) return
-
-    return `rgb(${_color.value?.[0]}, ${_color.value?.[1]}, ${_color.value?.[2]})`
-  },
-  set(val: RGBColor | undefined) {
-    _color.value = val
-  },
-})
+const color = ref<FastAverageColorResult>()
 
 const container = useTemplateRef('container')
 const imageElement = useTemplateRef('image')
@@ -26,13 +16,12 @@ const imageElement = useTemplateRef('image')
 const { tilt, roll } = useParallax(container)
 const { isOutside } = useMouseInElement(container)
 
-const bgColor = useState('bg:color')
 const randomY = useState('rand', () => Math.random() * -10)
 
 const style = computed<StyleValue>(() => {
   const aElementStyle: StyleValue | undefined = item.href
     ? {
-        backgroundColor: color.value,
+        backgroundColor: color.value?.rgb || '',
         color: 'white',
         border: '1px solid white',
       }
@@ -58,11 +47,6 @@ onMounted(async () => {
   color.value = await getColor(imageElement.value)
 })
 
-const handleClick = () => {
-  if (!imageElement.value) return
-  bgColor.value = getColor(imageElement.value)
-}
-
 const Char = defineComponent(() => {
   return () => (
     <div class="flex flex-col items-center">
@@ -80,9 +64,8 @@ const Component = defineComponent((props, ctx) => {
     h(
       tag,
       tag === 'a'
-        ? { ...props, onClick: undefined, href: item.href, target: '_blank' }
+        ? { ...props, href: item.href, target: '_blank' }
         : {
-            onClick: handleClick,
             ...props,
           },
       ctx.slots,
@@ -102,7 +85,7 @@ const Component = defineComponent((props, ctx) => {
         ref="image"
         :src="item.image"
         class="w-full h-full object-cover outline-4 outline outline-black transition-all outline-offset-4"
-        :style="{ outlineColor: color }"
+        :style="{ outlineColor: color?.rgb }"
       >
     </div>
 
