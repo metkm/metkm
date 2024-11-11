@@ -16,8 +16,7 @@
     "@tresjs/nuxt": "^3.0.7",
     "fast-average-color": "^9.4.0",
     "nuxt": "^3.14.159",
-    "three": "^0.170.0",
-    "vue": "latest"
+    "three": "^0.170.0"
   },
   "devDependencies": {
     "@types/three": "^0.169.0",
