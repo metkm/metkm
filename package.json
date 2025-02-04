@@ -10,20 +10,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/eslint": "^0.6.1",
-    "@nuxt/fonts": "^0.10.2",
-    "@nuxtjs/tailwindcss": "^6.12.2",
-    "@tresjs/nuxt": "^3.0.7",
-    "fast-average-color": "^9.4.0",
-    "nuxt": "^3.14.159",
-    "three": "^0.170.0"
-  },
-  "devDependencies": {
-    "@types/three": "^0.169.0",
-    "@vueuse/core": "^11.2.0",
-    "@vueuse/nuxt": "^11.2.0",
-    "tailwindcss": "^3.4.14",
-    "typescript": "^5.6.3"
-  },
-  "packageManager": "pnpm@9.12.3"
+    "nuxt": "^3.15.4",
+    "vue": "latest",
+    "vue-router": "latest"
+  }
 }
