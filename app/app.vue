@@ -18,14 +18,14 @@ const selectPrevProject = () => {
 </script>
 
 <template>
-  <main class="bg-background min-h-screen max-h-screen flex p-8">
+  <main class="bg-background min-h-screen max-h-screen flex">
     <div class="flex flex-col gap-8 max-w-7xl mx-auto">
-      <div class="flex items-end justify-between text-text-primary font-bold h-32">
-        <p class="text-4xl font-stretch-condensed">
+      <div class="flex flex-wrap items-end justify-between text-text-primary font-bold p-8 pt-24 pb-0">
+        <p class="text-lg lg:text-4xl font-stretch-condensed bg-black/20 lg:bg-transparent px-2 lg:px-0">
           [ {{ project.title }}. ]
         </p>
 
-        <p class="text-6xl">
+        <p class="text-2xl lg:text-6xl">
           <span class="text-xl">made with</span>
           {{ project.madeWith }}
         </p>
@@ -36,13 +36,13 @@ const selectPrevProject = () => {
           <img
             :key="project.image"
             :src="project.image"
-            class=" object-cover"
+            class=" object-cover h-full w-full"
           >
         </Transition>
       </div>
 
-      <div class="flex items-center justify-between h-32">
-        <p class="underline underline-offset-8 text-xl font-semibold text-text-description">
+      <div class="flex flex-wrap gap-8 items-center justify-between p-8 pt-0 pb-24">
+        <p class="underline underline-offset-8 lg:text-xl font-semibold text-text-description">
           {{ project.description }}
         </p>
 
