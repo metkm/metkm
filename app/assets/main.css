@@ -10,6 +10,31 @@ html, body, #nuxt {
   background-color: var(--bg-background);
 }
 
+.project-image-fade-right-leave-active,
+.project-image-fade-left-leave-active {
+  position: absolute;
+}
+
+.project-image-fade-right-enter-active,
+.project-image-fade-right-leave-active,
+.project-image-fade-left-enter-active,
+.project-image-fade-left-leave-active {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 350ms;
+}
+
+.project-image-fade-right-leave-to,
+.project-image-fade-left-enter-from {
+  transform: translateX(100%);
+}
+
+.project-image-fade-right-enter-from,
+.project-image-fade-left-leave-to
+{
+  transform: translateX(-100%);
+}
+
 @theme {
   --color-background: #D9CFC1;
   --color-text-primary: #3C343F;
