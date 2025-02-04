@@ -1,6 +1,19 @@
 <script setup lang="ts">
 import { projects } from './projects'
 
+useSeoMeta({
+  title: 'Metin Korkmaz',
+  description: 'Metin\'s portfolio',
+  ogTitle: 'Metin Korkmaz',
+  // ogImage: '/preview.webp',
+  ogDescription: 'Metin\'s portfolio',
+  ogUrl: 'https://metkm.win/',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Metin Korkmaz',
+  twitterDescription: 'Metin\'s portfolio',
+  twitterImage: '/preview.webp',
+})
+
 const selectedProjectIndex = ref(0)
 const transitionName = ref<'project-image-fade-right' | 'project-image-fade-left'>('project-image-fade-left')
 
@@ -19,7 +32,7 @@ const selectPrevProject = () => {
 
 <template>
   <main class="bg-background min-h-screen max-h-screen flex">
-    <div class="flex flex-col gap-8 max-w-7xl mx-auto">
+    <div class="flex flex-col gap-8 max-w-7xl mx-auto z-10">
       <div class="flex flex-wrap items-end justify-between text-text-primary font-bold p-8 pt-24 pb-0">
         <p class="text-lg lg:text-4xl font-stretch-condensed bg-black/20 lg:bg-transparent px-2 lg:px-0">
           [ {{ project.title }}. ]
@@ -59,5 +72,13 @@ const selectPrevProject = () => {
         </div>
       </div>
     </div>
+
+    <TresCanvas class="!absolute inset-0 z-0">
+      <TresOrthographicCamera
+        :position="[0, 0, 1]"
+      />
+
+      <TheNoise />
+    </TresCanvas>
   </main>
 </template>
