@@ -48,8 +48,8 @@ const selectPrevProject = () => {
       </filter>
     </svg>
 
-    <div class="flex flex-col gap-8 max-w-7xl mx-auto z-10">
-      <div class="flex flex-wrap items-end justify-between text-text-primary font-bold p-8 pt-24 pb-0">
+    <div class="flex flex-col w-full gap-8 z-10 p-12 px-28">
+      <div class="flex flex-wrap items-end justify-between text-text-primary font-bold p-8 pb-0">
         <p class="text-lg lg:text-4xl font-stretch-condensed bg-black/20 lg:bg-transparent px-2 lg:px-0">
           [ {{ project.title }}. ]
         </p>
@@ -60,7 +60,7 @@ const selectPrevProject = () => {
         </p>
       </div>
 
-      <div class="relative flex-1 overflow-hidden">
+      <div class="relative flex-1 overflow-hidden w-full">
         <Transition :name="transitionName">
           <img
             :key="project.image"
@@ -70,7 +70,7 @@ const selectPrevProject = () => {
         </Transition>
       </div>
 
-      <div class="flex flex-wrap gap-8 items-center justify-between p-8 pt-0 pb-24">
+      <div class="flex flex-wrap gap-8 items-center justify-between p-8 pt-0">
         <p class="underline underline-offset-8 lg:text-xl font-semibold text-text-description">
           {{ project.description }}
         </p>
