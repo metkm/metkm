@@ -1,18 +1,34 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 
-defineProps<{
+const props = defineProps<{
   icon?: string
+  href?: string
 }>()
+
+const Component = defineComponent((_props, _ctx) => {
+  const tag = props.href ? 'a' : 'button'
+
+  return () => {
+    return h(
+      tag,
+      props.href ? { target: '_blank', href: _props.href, ...props } : { ...props },
+      _ctx.slots,
+    )
+  }
+})
 </script>
 
 <template>
-  <button class="hover:bg-black/10 active:scale-110 transition-all">
+  <component
+    :is="Component"
+    class="hover:bg-black/10 active:scale-110 transition-all"
+  >
     <Icon
       v-if="icon"
       :icon="icon"
       ssr
       width="38"
     />
-  </button>
+  </component>
 </template>

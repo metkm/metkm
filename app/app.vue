@@ -77,6 +77,16 @@ const selectPrevProject = () => {
 
         <div class="flex items-center gap-2">
           <UiButton
+            icon="mdi:github"
+            href="https://github.com/metkm"
+          />
+
+          <UiButton
+            icon="mdi:linkedin"
+            href="https://www.linkedin.com/in/metkm/"
+          />
+
+          <UiButton
             icon="mdi:arrow-left"
             @click="selectPrevProject"
           />
