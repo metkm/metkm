@@ -10,6 +10,20 @@ html, body, #nuxt {
   background-color: var(--bg-background);
 }
 
+body::before {
+  filter: url(#grainy);
+  background: #000000;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 20%;
+  z-index: 999;
+  pointer-events: none;
+}
+
 .project-image-fade-right-leave-active,
 .project-image-fade-left-leave-active {
   position: absolute;

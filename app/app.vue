@@ -32,6 +32,22 @@ const selectPrevProject = () => {
 
 <template>
   <main class="bg-background min-h-screen max-h-screen flex">
+    <svg
+      class="absolute inset-0 z-50"
+    >
+      <filter id="grainy">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.6"
+        />
+        <feComposite
+          operator="in"
+          in2="SourceGraphic"
+          result="monoNoise"
+        />
+      </filter>
+    </svg>
+
     <div class="flex flex-col gap-8 max-w-7xl mx-auto z-10">
       <div class="flex flex-wrap items-end justify-between text-text-primary font-bold p-8 pt-24 pb-0">
         <p class="text-lg lg:text-4xl font-stretch-condensed bg-black/20 lg:bg-transparent px-2 lg:px-0">
@@ -73,7 +89,7 @@ const selectPrevProject = () => {
       </div>
     </div>
 
-    <TresCanvas class="!absolute inset-0 z-0">
+    <TresCanvas class="!absolute inset-0">
       <TresOrthographicCamera
         :position="[0, 0, 1]"
       />
