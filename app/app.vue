@@ -5,6 +5,7 @@ useSeoMeta({
   title: 'Metin Korkmaz',
   description: 'Metin\'s portfolio',
   ogTitle: 'Metin Korkmaz',
+  ogImage: '/preview.webp',
   ogDescription: 'Metin\'s portfolio',
   ogUrl: 'https://metkm.win/',
   twitterCard: 'summary_large_image',

@@ -4,6 +4,20 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@tresjs/nuxt', '@nuxt/ui'],
   devtools: { enabled: true },
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'en',
+      },
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/svg+xml',
+          href: '/favicon.svg',
+        },
+      ],
+    },
+  },
   css: ['~/assets/main.css'],
   future: {
     compatibilityVersion: 4,
