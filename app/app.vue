@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { cardsWithIds } from './constants'
-import type { Card } from './types/card'
+import { projects } from './projects'
 
 useSeoMeta({
   title: 'Metin Korkmaz',
@@ -15,94 +14,113 @@ useSeoMeta({
   twitterImage: '/preview.webp',
 })
 
-const selected = ref<Card>()
-const items = ref(cardsWithIds)
+const carousel = useTemplateRef('carousel')
+
+const selectedProjectIndex = ref(0)
+
+const project = computed(() => projects[selectedProjectIndex.value]!)
+
+const selectNextProject = () => {
+  carousel.value?.emblaApi?.scrollNext()
+}
+
+const selectPrevProject = () => {
+  carousel.value?.emblaApi?.scrollPrev()
+}
+
+const onCarouselSelect = () => {
+  const selectedIndex = carousel.value?.emblaApi?.selectedScrollSnap()
+  if (selectedIndex === undefined) return
+
+  selectedProjectIndex.value = selectedIndex
+}
+
+onMounted(() => {
+  carousel.value?.emblaApi?.on('select', onCarouselSelect)
+})
 </script>
 
 <template>
-  <main
-    class="grid grid-rows-[1fr_0fr] lg:grid-cols-[1fr_0fr] lg:max-h-lvh min-h-lvh overflow-hidden transition-all duration-500"
-    :class="{ 'lg:grid-cols-[1fr_1fr] lg:!grid-rows-1 !grid-rows-[1fr_1fr]': selected }"
-  >
-    <TheCanvas />
-
-    <div class="flex flex-col justify-center items-center pt-4 overflow-hidden max-w-screen gap-4 lg:gap-8">
-      <TransitionGroup
-        move-class="transition-all"
-        leave-active-class="absolute transition-all duration-500"
-        enter-active-class="transition-all duration-500"
-        leave-to-class="!translate-y-14 !opacity-0"
-        enter-from-class="!translate-y-14 !opacity-0"
-      >
-        <div
-          v-if="selected"
-          :key="1"
-        >
-          <TheCard :item="selected" />
-        </div>
-
-        <TheCards
-          :key="2"
-          v-model="selected"
-          v-model:items="items"
+  <main class="flex bg-background">
+    <svg class="absolute inset-0 z-50 pointer-events-none">
+      <filter id="grainy">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.6"
         />
-      </TransitionGroup>
-    </div>
+        <feComposite
+          operator="in"
+          in2="SourceGraphic"
+          result="monoNoise"
+        />
+      </filter>
+    </svg>
 
-    <div class="flex items-center min-w-0 min-h-0 transition-all">
-      <Transition
-        leave-active-class="transition-all"
-        enter-active-class="transition-all"
-        leave-to-class="opacity-0"
-        enter-from-class="opacity-0"
+    <div class="flex flex-col gap-4 min-h-screen max-h-screen h-screen overflow-hidden z-10">
+      <div class="flex flex-wrap gap-4 items-end justify-between text-text-primary font-bold p-8 pb-0">
+        <p class="text-lg lg:text-4xl font-stretch-condensed bg-black/20 lg:bg-transparent px-2 lg:px-0">
+          [ {{ project.title }}. ]
+        </p>
+
+        <p class="text-2xl lg:text-6xl">
+          <span class="text-xl">made with</span>
+          {{ project.madeWith }}
+        </p>
+      </div>
+
+      <UCarousel
+        ref="carousel"
+        v-slot="{ item }"
+        :items="projects"
+        class="max-h-full flex-1 overflow-hidden"
+        :contain-scroll="false"
+        :ui="{
+          item: 'h-full basis-[90%]',
+          container: 'h-full',
+          viewport: 'h-full',
+        }"
       >
-        <section
-          v-if="selected"
-          class="text-neutral-100 flex flex-col gap-2 lg:gap-4 justify-between rounded-lg p-2 lg:p-4 w-full aspect-video"
+        <img
+          :src="item.image"
+          class="h-full w-full object-cover"
         >
-          <div>
-            <h1>
-              {{ selected.title }}
-            </h1>
-            <p class="text-neutral-400 text-sm">
-              {{ selected.smallDescription }}
-            </p>
-          </div>
+      </UCarousel>
 
-          <p class="text-neutral-100">
-            {{ selected.description }}
-          </p>
+      <div class="flex flex-wrap gap-4 items-center justify-between p-8 pt-0">
+        <p class="underline underline-offset-8 lg:text-xl font-semibold text-text-description">
+          {{ project.description }}
+        </p>
 
-          <img
-            :src="selected.image"
-            class="rounded-lg max-h-full shadow object-cover"
-          >
+        <div class="flex items-center gap-2  text-black">
+          <UiButton
+            icon="mdi:github"
+            href="https://github.com/metkm"
+          />
 
-          <a
-            :href="selected.url"
-            target="_blank"
-            class="hover:bg-neutral-200 w-max p-1 rounded-lg"
-          >
-            <IconGithub />
-          </a>
-        </section>
-      </Transition>
+          <UiButton
+            icon="mdi:linkedin"
+            href="https://www.linkedin.com/in/metkm/"
+          />
+
+          <UiButton
+            icon="mdi:arrow-left"
+            @click="selectPrevProject"
+          />
+
+          <UiButton
+            icon="mdi:arrow-right"
+            @click="selectNextProject"
+          />
+        </div>
+      </div>
     </div>
 
-    <div class="lg:absolute left-4 bottom-4 p-4 font-bold text-on-primary font-serif flex flex-col self-start">
-      <p>
-        Me:
-      </p>
-      <a href="https://github.com/metkm">Github</a>
-      <a href="https://www.linkedin.com/in/metkm/">LinkedIn</a>
-    </div>
+    <TresCanvas class="!absolute inset-0 pointer-events-none">
+      <TresOrthographicCamera
+        :position="[0, 0, 1]"
+      />
+
+      <TheNoise />
+    </TresCanvas>
   </main>
 </template>
-
-<style>
-html {
-  font-family: Inter;
-  background-color: #EADBC8;
-  color: white;
-}
-</style>

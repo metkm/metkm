@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import { Vector2, Vector3 } from 'three'
-import { defaultBackground } from '~/constants'
-import commonVertex from '~/shader/common.vert?raw'
-import noiseFrag from '~/shader/noise.frag?raw'
+import commonVertex from '~/shader/commonVertex.glsl?raw'
+import noiseFrag from '~/shader/noiseFragment.glsl?raw'
 
 const width = window.innerWidth
 const height = window.innerHeight
 
 const { onLoop } = useRenderLoop()
-const bgColor = useState('bg:color', () => defaultBackground)
-
-const output = useTransition(bgColor)
+const bgColor = useState('bg:color', () => [217 / 255, 207 / 255, 193 / 255])
 
 const uniforms = {
   resolution: { value: new Vector2(width, height) },
@@ -20,13 +17,6 @@ const uniforms = {
 
 onLoop(({ elapsed }) => {
   uniforms.time.value = elapsed
-})
-
-watch(output, async () => {
-  const [r, g, b] = output.value
-  uniforms.targetColor.value.set(r! / 255, g! / 255, b! / 255)
-}, {
-  immediate: true,
 })
 </script>
 

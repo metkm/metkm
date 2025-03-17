@@ -60,18 +60,18 @@ void main() {
   color = vec3(billow);
 
   // One line
-  // color = smoothstep(0.001, 0.002, color);
+  color = smoothstep(0.001, 0.005, color);
 
   // Multiple lines
   // color = round(color / 0.10) * 0.10;
 
   // Multiple lines 2
-  float st = round(billow / 0.08) * 0.08;
-  float st_low = st - st;
-  float st_high = st + st;
-  float st_mid = (st_low + st_high) / 4.0; // or divide by 2
-  color = vec3(step(billow, st_mid + 0.035));
+  // float st = round(billow / 0.08) * 0.08;
+  // float st_low = st - st;
+  // float st_high = st + st;
+  // float st_mid = (st_low + st_high) / 4.0; // or divide by 2
+  // color = vec3(step(billow, st_mid + 0.035));
 
   color = mix(targetColor, vec3(0.0), color);
-  gl_FragColor = vec4(color / 2.0, 1.0);
+  gl_FragColor = vec4(color, 0.1);
 }
