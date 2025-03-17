@@ -13,4 +13,11 @@ export const projects = [
     image: '/images/otobusum-anlik.png',
     description: 'Otobüsüm Nerede alternative with extra features.',
   },
+  {
+    id: 3,
+    title: 'Mutual Finder',
+    madeWith: 'VueJs',
+    image: '/images/mutual-finder.png',
+    description: 'A desktop app for a game with more than 10k downloads.',
+  },
 ]
