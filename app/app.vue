@@ -5,7 +5,6 @@ useSeoMeta({
   title: 'Metin Korkmaz',
   description: 'Metin\'s portfolio',
   ogTitle: 'Metin Korkmaz',
-  // ogImage: '/preview.webp',
   ogDescription: 'Metin\'s portfolio',
   ogUrl: 'https://metkm.win/',
   twitterCard: 'summary_large_image',
@@ -14,27 +13,35 @@ useSeoMeta({
   twitterImage: '/preview.webp',
 })
 
+const carousel = useTemplateRef('carousel')
+
 const selectedProjectIndex = ref(0)
-const transitionName = ref<'project-image-fade-right' | 'project-image-fade-left'>('project-image-fade-left')
 
 const project = computed(() => projects[selectedProjectIndex.value]!)
 
 const selectNextProject = () => {
-  selectedProjectIndex.value = Math.min(selectedProjectIndex.value + 1, projects.length - 1)
-  transitionName.value = 'project-image-fade-left'
+  carousel.value?.emblaApi?.scrollNext()
 }
 
 const selectPrevProject = () => {
-  selectedProjectIndex.value = Math.max(selectedProjectIndex.value - 1, 0)
-  transitionName.value = 'project-image-fade-right'
+  carousel.value?.emblaApi?.scrollPrev()
 }
+
+const onCarouselSelect = () => {
+  const selectedIndex = carousel.value?.emblaApi?.selectedScrollSnap()
+  if (selectedIndex === undefined) return
+
+  selectedProjectIndex.value = selectedIndex
+}
+
+onMounted(() => {
+  carousel.value?.emblaApi?.on('select', onCarouselSelect)
+})
 </script>
 
 <template>
-  <main class="bg-background min-h-screen max-h-screen flex">
-    <svg
-      class="absolute inset-0 z-50"
-    >
+  <main class="flex bg-background">
+    <svg class="absolute inset-0 z-50 pointer-events-none">
       <filter id="grainy">
         <feTurbulence
           type="fractalNoise"
@@ -48,8 +55,8 @@ const selectPrevProject = () => {
       </filter>
     </svg>
 
-    <div class="flex flex-col w-full gap-8 z-10 p-4 lg:p-12 lg:px-28">
-      <div class="flex flex-wrap items-end justify-between text-text-primary font-bold p-8 pb-0">
+    <div class="flex flex-col gap-4 min-h-screen max-h-screen h-screen overflow-hidden z-10">
+      <div class="flex flex-wrap gap-4 items-end justify-between text-text-primary font-bold p-8 pb-0">
         <p class="text-lg lg:text-4xl font-stretch-condensed bg-black/20 lg:bg-transparent px-2 lg:px-0">
           [ {{ project.title }}. ]
         </p>
@@ -60,22 +67,30 @@ const selectPrevProject = () => {
         </p>
       </div>
 
-      <div class="relative flex-1 overflow-hidden w-full">
-        <Transition :name="transitionName">
-          <img
-            :key="project.image"
-            :src="project.image"
-            class=" object-cover h-full w-full"
-          >
-        </Transition>
-      </div>
+      <UCarousel
+        ref="carousel"
+        v-slot="{ item }"
+        :items="projects"
+        class="max-h-full flex-1 overflow-hidden"
+        :contain-scroll="false"
+        :ui="{
+          item: 'h-full basis-[90%]',
+          container: 'h-full',
+          viewport: 'h-full',
+        }"
+      >
+        <img
+          :src="item.image"
+          class="h-full w-full object-cover"
+        >
+      </UCarousel>
 
-      <div class="flex flex-wrap gap-8 items-center justify-between p-8 pt-0">
+      <div class="flex flex-wrap gap-4 items-center justify-between p-8 pt-0">
         <p class="underline underline-offset-8 lg:text-xl font-semibold text-text-description">
           {{ project.description }}
         </p>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2  text-black">
           <UiButton
             icon="mdi:github"
             href="https://github.com/metkm"
@@ -99,7 +114,7 @@ const selectPrevProject = () => {
       </div>
     </div>
 
-    <TresCanvas class="!absolute inset-0">
+    <TresCanvas class="!absolute inset-0 pointer-events-none">
       <TresOrthographicCamera
         :position="[0, 0, 1]"
       />

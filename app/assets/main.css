@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
-@import "tailwindcss";
+@import "tailwindcss" theme(static);
+@import "@nuxt/ui";
 
 html {
   font-family: "Newsreader", serif;
@@ -22,36 +23,6 @@ body::before {
   opacity: 20%;
   z-index: 999;
   pointer-events: none;
-}
-
-.project-image-fade-right-leave-active,
-.project-image-fade-left-leave-active {
-  position: absolute;
-}
-
-.project-image-fade-right-enter-active,
-.project-image-fade-right-leave-active,
-.project-image-fade-left-enter-active,
-.project-image-fade-left-leave-active {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 500ms;
-}
-
-.project-image-fade-left-leave-to {
-  transform: translateX(-25%);
-}
-
-.project-image-fade-left-enter-from {
-  transform: translateX(100%);
-}
-
-.project-image-fade-right-leave-to {
-  transform: translateX(25%);
-}
-
-.project-image-fade-right-enter-from {
-  transform: translateX(-100%);
 }
 
 @theme {
