@@ -48,7 +48,7 @@ const selectPrevProject = () => {
       </filter>
     </svg>
 
-    <div class="flex flex-col w-full gap-8 z-10 p-12 px-28">
+    <div class="flex flex-col w-full gap-8 z-10 p-4 lg:p-12 lg:px-28">
       <div class="flex flex-wrap items-end justify-between text-text-primary font-bold p-8 pb-0">
         <p class="text-lg lg:text-4xl font-stretch-condensed bg-black/20 lg:bg-transparent px-2 lg:px-0">
           [ {{ project.title }}. ]
