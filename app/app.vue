@@ -57,7 +57,7 @@ onMounted(() => {
     </svg>
 
     <div class="flex flex-col gap-4 min-h-screen max-h-screen h-screen overflow-hidden z-10">
-      <div class="flex flex-wrap gap-4 items-end justify-between text-text-primary font-bold p-8 pb-0">
+      <div class="flex flex-wrap gap-4 items-end max-w-7xl w-full mx-auto justify-between text-text-primary font-bold p-8 pb-0">
         <p class="text-lg lg:text-4xl font-stretch-condensed bg-black/20 lg:bg-transparent px-2 lg:px-0">
           [ {{ project.title }}. ]
         </p>
@@ -75,18 +75,20 @@ onMounted(() => {
         class="max-h-full flex-1 overflow-hidden"
         :contain-scroll="false"
         :ui="{
-          item: 'h-full basis-[90%]',
+          item: 'h-full basis-[90%] relative',
           container: 'h-full',
           viewport: 'h-full',
         }"
       >
-        <img
-          :src="item.image"
-          class="h-full w-full object-cover"
-        >
+        <div class="flex pr-8 pb-8 before:absolute before:bg-text-primary before:left-1/12 before:top-1/12 before:right-0 before:bottom-0 before:flex h-full">
+          <img
+            :src="item.image"
+            class="h-full w-full object-cover z-10"
+          >
+        </div>
       </UCarousel>
 
-      <div class="flex flex-wrap gap-4 items-center justify-between p-8 pt-0">
+      <div class="flex flex-wrap gap-4 items-center justify-between p-8 pt-0 max-w-7xl w-full mx-auto">
         <p class="underline underline-offset-8 lg:text-xl font-semibold text-text-description">
           {{ project.description }}
         </p>

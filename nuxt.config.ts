@@ -19,6 +19,9 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/main.css'],
+  routeRules: {
+    '/': { prerender: true },
+  },
   future: {
     compatibilityVersion: 4,
   },
