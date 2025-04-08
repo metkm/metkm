@@ -12,7 +12,7 @@ const Component = defineComponent((_props, _ctx) => {
   return () => {
     return h(
       tag,
-      props.href ? { target: '_blank', href: _props.href, ...props } : { ...props },
+      props.href ? { target: '_blank', ...props } : { ...props },
       _ctx.slots,
     )
   }
@@ -30,5 +30,6 @@ const Component = defineComponent((_props, _ctx) => {
       ssr
       width="38"
     />
+    <slot />
   </component>
 </template>

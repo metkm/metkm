@@ -1,4 +1,114 @@
-<script setup lang="ts">
+<script setup lang="ts"></script>
+
+<template>
+  <main class="p-8 py-12">
+    <div class="flex items-center group transition-all gap-2 max-w-xl mx-auto mb-8">
+      <h1 class="font-bold text-4xl">
+        Metin
+      </h1>
+      <p class="group-hover:scale-100 scale-0 transition-all">
+        metkm
+      </p>
+      <h1 class="font-bold text-4xl -ml-14 group-hover:ml-0 transition-all">
+        Korkmaz
+      </h1>
+    </div>
+
+    <article class="max-w-xl mx-auto">
+      <p class="my-6">
+        Hello! I'm someone who's passionate about working with a variety of technologies. I enjoy
+        exploring how others build things and diving deep into how everything works under the hood,
+        including systems like the Windows API.
+      </p>
+      <p class="my-6">
+        I also have a strong interest in high-performance, compiled languages like Rust, and I love
+        making micro-optimizations that push performance to make apps a little bit faster!
+      </p>
+
+      <div class="flex flex-col gap-4 my-6">
+        <div>
+          <p class="mb-2">
+            Technologies I mainly use and still do
+          </p>
+
+          <div class="flex flex-wrap gap-2">
+            <UButton icon="i-material-icon-theme:vue">
+              Vue
+            </UButton>
+            <UButton icon="i-material-icon-theme:react">
+              React
+            </UButton>
+            <UButton icon="i-material-icon-theme:typescript">
+              Typescript
+            </UButton>
+            <UButton icon="i-material-icon-theme:tailwindcss">
+              Tailwindcss
+            </UButton>
+            <UButton icon="i-material-icon-theme:nodejs">
+              NodeJs
+            </UButton>
+            <UButton icon="i-material-icon-theme:next">
+              NextJs
+            </UButton>
+            <UButton icon="i-material-icon-theme:nuxt">
+              NuxtJs
+            </UButton>
+          </div>
+        </div>
+
+        <div>
+          <p class="mb-2">
+            Technologies I've used before and comfortable
+          </p>
+
+          <div class="flex flex-wrap gap-2">
+            <UButton icon="i-material-icon-theme:tauri">
+              Tauri
+            </UButton>
+            <UButton icon="i-devicon-electron">
+              Electron
+            </UButton>
+            <UButton icon="i-material-icon-theme:rust">
+              Rust
+            </UButton>
+            <UButton icon="i-devicon-postgresql">
+              Postgres
+            </UButton>
+            <UButton icon="i-devicon-mongodb">
+              MongoDb
+            </UButton>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="mb-2">
+          Links
+        </p>
+
+        <div class="flex gap-2">
+          <UButton
+            icon="i-mdi-linkedin"
+            href="https://github.com/metkm"
+            target="_blank"
+          >
+            Linkedin
+          </UButton>
+
+          <UButton
+            icon="i-mdi-github"
+            href="https://www.linkedin.com/in/metkm/"
+            target="_blank"
+          >
+            Linkedin
+          </UButton>
+        </div>
+      </div>
+    </article>
+  </main>
+</template>
+
+<!-- <script setup lang="ts">
 import { projects } from './projects'
 
 useSeoMeta({
@@ -125,4 +235,4 @@ onMounted(() => {
       <TheNoise />
     </TresCanvas>
   </main>
-</template>
+</template> -->
