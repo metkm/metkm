@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <main class="p-8 py-12">
+  <main class="p-8 py-12 min-h-screen">
     <div class="flex items-center group transition-all gap-2 max-w-xl mx-auto mb-8">
       <h1 class="font-bold text-4xl">
         Metin
@@ -153,6 +153,16 @@
         </div>
       </div>
     </article>
+
+    <div class="absolute inset-0 !pointer-events-none">
+      <TresCanvas class="h-full w-full !pointer-events-none">
+        <TresOrthographicCamera
+          :position="[0, 0, 1]"
+        />
+
+        <TheNoise />
+      </TresCanvas>
+    </div>
   </main>
 </template>
 

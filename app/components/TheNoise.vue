@@ -7,16 +7,15 @@ const width = window.innerWidth
 const height = window.innerHeight
 
 const { onLoop } = useRenderLoop()
-const bgColor = useState('bg:color', () => [217 / 255, 207 / 255, 193 / 255])
 
 const uniforms = {
   resolution: { value: new Vector2(width, height) },
-  targetColor: { value: new Vector3(...bgColor.value) },
+  targetColor: { value: new Vector3(0, 0, 0) },
   time: { value: 0 },
 }
 
 onLoop(({ elapsed }) => {
-  uniforms.time.value = elapsed
+  uniforms.time.value = elapsed / 5
 })
 </script>
 
