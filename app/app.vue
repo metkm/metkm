@@ -32,25 +32,53 @@
           </p>
 
           <div class="flex flex-wrap gap-2">
-            <UButton icon="i-material-icon-theme:vue">
+            <UButton
+              icon="i-material-icon-theme:vue"
+              to="https://vuejs.org/"
+              target="_blank"
+            >
               Vue
             </UButton>
-            <UButton icon="i-material-icon-theme:react">
+            <UButton
+              icon="i-material-icon-theme:react"
+              to="https://react.dev/"
+              target="_blank"
+            >
               React
             </UButton>
-            <UButton icon="i-material-icon-theme:typescript">
+            <UButton
+              icon="i-material-icon-theme:typescript"
+              to="https://www.typescriptlang.org/"
+              target="_blank"
+            >
               Typescript
             </UButton>
-            <UButton icon="i-material-icon-theme:tailwindcss">
+            <UButton
+              icon="i-material-icon-theme:tailwindcss"
+              to="https://tailwindcss.com/"
+              target="_blank"
+            >
               Tailwindcss
             </UButton>
-            <UButton icon="i-material-icon-theme:nodejs">
+            <UButton
+              icon="i-material-icon-theme:nodejs"
+              to="https://nodejs.org/en"
+              target="_blank"
+            >
               NodeJs
             </UButton>
-            <UButton icon="i-material-icon-theme:next">
+            <UButton
+              icon="i-material-icon-theme:next"
+              to="https://nextjs.org/"
+              target="_blank"
+            >
               NextJs
             </UButton>
-            <UButton icon="i-material-icon-theme:nuxt">
+            <UButton
+              icon="i-material-icon-theme:nuxt"
+              to="https://nuxt.com/"
+              target="_blank"
+            >
               NuxtJs
             </UButton>
           </div>
@@ -62,19 +90,39 @@
           </p>
 
           <div class="flex flex-wrap gap-2">
-            <UButton icon="i-material-icon-theme:tauri">
+            <UButton
+              icon="i-material-icon-theme:tauri"
+              to="https://v2.tauri.app/"
+              target="_blank"
+            >
               Tauri
             </UButton>
-            <UButton icon="i-devicon-electron">
+            <UButton
+              icon="i-devicon-electron"
+              to="https://www.electronjs.org/"
+              target="_blank"
+            >
               Electron
             </UButton>
-            <UButton icon="i-material-icon-theme:rust">
+            <UButton
+              icon="i-material-icon-theme:rust"
+              to="https://www.rust-lang.org/"
+              target="_blank"
+            >
               Rust
             </UButton>
-            <UButton icon="i-devicon-postgresql">
+            <UButton
+              icon="i-devicon-postgresql"
+              to="https://www.postgresql.org/"
+              target="_blank"
+            >
               Postgres
             </UButton>
-            <UButton icon="i-devicon-mongodb">
+            <UButton
+              icon="i-devicon-mongodb"
+              to="https://www.mongodb.com/"
+              target="_blank"
+            >
               MongoDb
             </UButton>
           </div>
