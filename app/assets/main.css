@@ -6,48 +6,23 @@
   html {
     font-family: Inter;
   }
-
-  /* p {
-    margin-top: calc(var(--spacing) * 4);
-    margin-bottom: calc(var(--spacing) * 4);
-    color: var(--color-zinc-300);
-  } */
 }
 
 :root {
   --ui-bg: var(--color-zinc-950)
 }
 
-/* @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
-
-@import "tailwindcss" theme(static);
-@import "@nuxt/ui";
-
-html {
-  font-family: "Newsreader", serif;
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 
-html, body, #nuxt {
-  height: var(--h-screen);
-  background-color: var(--bg-background);
+.slide-enter {
+  animation: fade 0.2s ease-in-out;
 }
-
-body::before {
-  filter: url(#grainy);
-  background: #000000;
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  opacity: 20%;
-  z-index: 999;
-  pointer-events: none;
-}
-
-@theme {
-  --color-background: #D9CFC1;
-  --color-text-primary: #3C343F;
-  --color-text-description: #686054;
-} */

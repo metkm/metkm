@@ -2,7 +2,7 @@
 
 <template>
   <main class="p-8 py-12 min-h-screen">
-    <div class="flex items-center group transition-all gap-2 max-w-xl mx-auto mb-8">
+    <div class="flex items-center group transition-all gap-2 max-w-xl mx-auto mb-8 slide-enter">
       <h1 class="font-bold text-4xl">
         Metin
       </h1>
@@ -14,7 +14,7 @@
       </h1>
     </div>
 
-    <article class="max-w-xl mx-auto">
+    <article class="max-w-xl mx-auto slide-enter">
       <p class="my-6">
         Hello! I'm someone who's passionate about working with a variety of technologies. I enjoy
         exploring how others build things and diving deep into how everything works under the hood,
