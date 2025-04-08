@@ -8,10 +8,6 @@
   }
 }
 
-:root {
-  --ui-bg: var(--color-zinc-950);
-}
-
 @keyframes fade {
   from {
     opacity: 0;

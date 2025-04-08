@@ -190,3 +190,13 @@ useSeoMeta({
     </section>
   </main>
 </template>
+
+<style>
+:root {
+  --ui-bg: var(--color-zinc-950);
+}
+
+html {
+  background-color: var(--ui-bg);
+}
+</style>
