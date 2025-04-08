@@ -183,20 +183,8 @@ useSeoMeta({
       </p>
 
       <ClientOnly>
-        <Transition name="fade">
-          <TheProjects />
-        </Transition>
+        <TheProjects />
       </ClientOnly>
     </section>
   </main>
 </template>
-
-<style>
-:root {
-  --ui-bg: var(--color-zinc-950);
-}
-
-html {
-  background-color: var(--ui-bg);
-}
-</style>
