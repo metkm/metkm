@@ -1,8 +1,21 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+useSeoMeta({
+  title: 'Metin Korkmaz',
+  description: 'Metin\'s portfolio',
+  ogTitle: 'Metin Korkmaz',
+  ogImage: '/preview.webp',
+  ogDescription: 'Metin\'s portfolio',
+  ogUrl: 'https://metkm.win/',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Metin Korkmaz',
+  twitterDescription: 'Metin\'s portfolio',
+  twitterImage: '/preview.webp',
+})
+</script>
 
 <template>
-  <main class="p-8 py-12 min-h-screen">
-    <div class="flex items-center group transition-all gap-2 max-w-xl mx-auto mb-8 slide-enter">
+  <main class="flex flex-col gap-24 p-8 py-12 min-h-screen">
+    <div class="flex items-center group transition-all gap-2 max-w-xl mx-auto slide-enter">
       <h1 class="font-bold text-4xl">
         Metin
       </h1>
@@ -15,7 +28,7 @@
     </div>
 
     <article class="max-w-xl mx-auto slide-enter">
-      <p class="my-6">
+      <p class="mb-6">
         Hello! I'm someone who's passionate about working with a variety of technologies. I enjoy
         exploring how others build things and diving deep into how everything works under the hood,
         including systems like the Windows API.
@@ -131,7 +144,7 @@
 
       <div>
         <p class="mb-2">
-          Links
+          Links to contact me
         </p>
 
         <div class="flex gap-2">
@@ -154,7 +167,15 @@
       </div>
     </article>
 
-    <div class="absolute inset-0 !pointer-events-none">
+    <section>
+      <p class="max-w-xl mx-auto mb-2">
+        Some projects I've worked on
+      </p>
+
+      <TheProjects />
+    </section>
+
+    <div class="fixed inset-0 !pointer-events-none -z-50">
       <TresCanvas class="h-full w-full !pointer-events-none">
         <TresOrthographicCamera
           :position="[0, 0, 1]"
