@@ -167,7 +167,7 @@ useSeoMeta({
       </div>
     </article>
 
-    <section>
+    <section class="slide-enter">
       <p class="max-w-xl mx-auto mb-2">
         Some projects I've worked on
       </p>
@@ -175,7 +175,7 @@ useSeoMeta({
       <TheProjects />
     </section>
 
-    <div class="fixed inset-0 !pointer-events-none -z-50">
+    <div class="fixed inset-0 !pointer-events-none -z-50 slide-enter">
       <TresCanvas class="h-full w-full !pointer-events-none">
         <TresOrthographicCamera
           :position="[0, 0, 1]"
