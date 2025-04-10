@@ -159,15 +159,15 @@ useSeoMeta({
 
         <div class="flex gap-2">
           <UButton
-            icon="i-mdi-linkedin"
+            icon="i-mdi-github"
             href="https://github.com/metkm"
             target="_blank"
           >
-            Linkedin
+            Github
           </UButton>
 
           <UButton
-            icon="i-mdi-github"
+            icon="i-mdi-linkedin"
             href="https://www.linkedin.com/in/metkm/"
             target="_blank"
           >
