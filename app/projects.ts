@@ -24,6 +24,9 @@ export const projects = [
       {
         icon: 'i-devicon-postgresql',
       },
+      {
+        icon: 'i-material-icon-theme:react',
+      },
     ],
   },
   {
@@ -41,6 +44,24 @@ export const projects = [
       },
       {
         icon: 'i-material-icon-theme:rust',
+      },
+      {
+        icon: 'i-material-icon-theme:tauri',
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: 'spodate',
+    image: '/images/spodate.webp',
+    github: 'https://github.com/metkm/spodate',
+    description: 'Vue app with cool animations using motion. Spotify API',
+    usedTechnologies: [
+      {
+        icon: 'i-material-icon-theme:vue',
+      },
+      {
+        icon: 'i-material-icon-theme:nuxt',
       },
     ],
   },
