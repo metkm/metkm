@@ -62,6 +62,7 @@ void main() {
 
   // One line
   // color = smoothstep(0.001, 0.005, color);
+  // color = smoothstep(0.001, 0.005, color);
 
   // Multiple lines/
   // color = round(color / 0.1) * 0.1;
