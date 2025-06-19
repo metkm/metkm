@@ -14,8 +14,24 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="slide-enter-content flex flex-col gap-16 min-h-screen p-8 bg-(--ui-bg)">
+  <main class="slide-enter-content flex flex-col gap-16 min-h-screen p-8">
     <div class="fixed inset-0 !pointer-events-none">
+      <div class="filter-[url(#noiseFilter)] bg-white fixed inset-0 z-50 opacity-30 pointer-events-none" />
+
+      <svg class="absolute inset-0">
+        <filter id="noiseFilter">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.7"
+          />
+          <feComposite
+            operator="in"
+            in2="SourceGraphic"
+            result="monoNoise"
+          />
+        </filter>
+      </svg>
+
       <TresCanvas class="h-full w-full !pointer-events-none">
         <TresOrthographicCamera
           :position="[0, 0, 1]"

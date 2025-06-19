@@ -10,12 +10,13 @@ const { onLoop } = useRenderLoop()
 
 const uniforms = {
   resolution: { value: new Vector2(width, height) },
-  targetColor: { value: new Vector3(0, 0, 0) },
+  targetColor: { value: new Vector3(242 / 255, 118 / 255, 107 / 255) },
+  backgroundColor: { value: new Vector3(8 / 255, 27 / 255, 38 / 255) },
   time: { value: 0 },
 }
 
 onLoop(({ elapsed }) => {
-  uniforms.time.value = elapsed / 5
+  uniforms.time.value = elapsed
 })
 </script>
 

@@ -1,5 +1,6 @@
 uniform vec2 resolution;
 uniform vec3 targetColor;
+uniform vec3 backgroundColor;
 uniform float time;
 
 vec2 quintic(vec2 p) {
@@ -24,7 +25,7 @@ void main() {
 
   vec3 color = vec3(0.0);
 
-  uv *= 2.0;
+  // uv *= 2.0;
   vec2 gridId = floor(uv);
   vec2 gridUv = fract(uv);
   color = vec3(gridId, 0.0);
@@ -60,18 +61,27 @@ void main() {
   color = vec3(billow);
 
   // One line
-  color = smoothstep(0.001, 0.005, color);
+  // color = smoothstep(0.001, 0.005, color);
 
-  // Multiple lines
-  // color = round(color / 0.10) * 0.10;
+  // Multiple lines/
+  // color = round(color / 0.1) * 0.1;
 
   // Multiple lines 2
-  float st = round(billow / 0.08) * 0.08;
-  float st_low = st - st;
-  float st_high = st + st;
-  float st_mid = (st_low + st_high) / 4.0; // or divide by 2
-  color = vec3(step(billow, st_mid + 0.035));
+  float stp = 0.1;
+  float st = round(billow / stp) * stp;
+  color = vec3(
+    smoothstep(
+      billow - stp,
+      billow + stp,
+      st / 14.0
+    )
+  );
+  //
+  // float st_low = st - st;
+  // float st_high = st + st;
+  // float st_mid = (st_low + st_high) / 4.0; // or divide by 2
+  // color = vec3(step(billow, st_mid + 0.085));
 
-  color = mix(targetColor, vec3(0.2), color);
-  gl_FragColor = vec4(color, 0.1);
+  color = mix(backgroundColor, targetColor, color);
+  gl_FragColor = vec4(color, 0.4);
 }
