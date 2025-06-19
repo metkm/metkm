@@ -5,12 +5,11 @@
 @layer base {
   html {
     font-family: Inter;
-    color: var(--ui-color-neutral-700);
   }
 }
 
 :root {
-  --ui-bg: var(--color-zinc-950);
+  /* --ui-bg: var(--color-zinc-950); */
 }
 
 @keyframes fade {

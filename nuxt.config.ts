@@ -16,8 +16,12 @@ export default defineNuxtConfig({
         },
       ],
     },
+    pageTransition: { name: 'page', mode: 'in-out' },
   },
   css: ['~/assets/main.css'],
+  colorMode: {
+    preference: 'dark',
+  },
   routeRules: {
     '/': { prerender: true },
   },

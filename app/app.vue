@@ -14,7 +14,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="slide-enter-content flex flex-col gap-24 p-8 py-12 min-h-screen bg-(--ui-bg)">
+  <main class="slide-enter-content flex flex-col gap-16 min-h-screen p-8 bg-(--ui-bg)">
     <div class="fixed inset-0 !pointer-events-none">
       <TresCanvas class="h-full w-full !pointer-events-none">
         <TresOrthographicCamera
@@ -25,7 +25,7 @@ useSeoMeta({
       </TresCanvas>
     </div>
 
-    <div class="flex items-center group transition-all gap-2 max-w-xl mx-auto">
+    <div class="flex items-center group transition-all gap-2 mx-auto max-w-xl">
       <h1 class="font-bold text-4xl">
         Metin
       </h1>
@@ -38,6 +38,8 @@ useSeoMeta({
     </div>
 
     <article class="max-w-xl mx-auto slide-enter">
+      <NuxtLink to="/about">About page</NuxtLink>
+
       <p class="mb-6">
         Hello! I'm someone who's passionate about working with a variety of technologies. I enjoy
         exploring how others build things and diving deep into how everything works under the hood,
@@ -188,3 +190,28 @@ useSeoMeta({
     </section>
   </main>
 </template>
+
+<!-- <style>
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.750s cubic-bezier(0.4, 0, 0.2, 1);
+  position: fixed;
+  inset: 0;
+}
+
+.page-leave-to {
+  transform: translateY(-50px);
+  filter: brightness(0.50);
+}
+
+.page-enter-from {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.page-enter-active > * > * {
+  animation: fade 1s both 1;
+  --enter-stage: 0;
+  animation-delay: calc(150ms * var(--enter-stage));
+}
+</style> -->
