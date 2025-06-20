@@ -16,7 +16,7 @@ useSeoMeta({
 <template>
   <main class="slide-enter-content flex flex-col gap-16 min-h-screen p-8">
     <div class="fixed inset-0 !pointer-events-none">
-      <div class="filter-[url(#noiseFilter)] bg-white fixed inset-0 z-50 opacity-30 pointer-events-none" />
+      <div class="filter-[url(#noiseFilter)] bg-black fixed inset-0 z-50 opacity-25 pointer-events-none" />
 
       <svg class="absolute inset-0">
         <filter id="noiseFilter">
@@ -32,9 +32,16 @@ useSeoMeta({
         </filter>
       </svg>
 
-      <TresCanvas class="h-full w-full !pointer-events-none">
-        <TresOrthographicCamera
+      <TresCanvas
+        window-size
+        class="!pointer-events-none opacity-50"
+      >
+        <!-- <TresOrthographicCamera
           :position="[0, 0, 1]"
+        /> -->
+        <TresPerspectiveCamera
+          :position="[0, -1, 0.8]"
+          :look-at="[0, 0, -0.8]"
         />
 
         <TheNoise />

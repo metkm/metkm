@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { Vector2, Vector3 } from 'three'
-import commonVertex from '~/shader/commonVertex.glsl?raw'
-import noiseFrag from '~/shader/noiseFragment.glsl?raw'
+import { Color, Vector2 } from 'three'
+import commonVertex from '~/shader/vertex.glsl?raw'
+import noiseFrag from '~/shader/noise.glsl?raw'
 
 const width = ref(window.innerWidth)
 const height = ref(window.innerHeight)
+
+const palette = ['#f2766b', '#586166', '#081b26', '#f2766b', '#586166', '#081b26']
+const colors = palette.map(color => new Color(color))
 
 const { onLoop } = useRenderLoop()
 
 const uniforms = {
   resolution: { value: new Vector2(width.value, height.value) },
-  targetColor: { value: new Vector3(242 / 255, 118 / 255, 107 / 255) },
-  backgroundColor: { value: new Vector3(8 / 255, 27 / 255, 38 / 255) },
+  colors: { value: colors },
   time: { value: 0 },
 }
 
@@ -35,7 +37,11 @@ onMounted(() => {
 
 <template>
   <TresMesh>
-    <TresPlaneGeometry :args="[width, height]" />
+    <TresPlaneGeometry
+      :args="[3.5, 2, 300 * 3.5, 300 * 2]"
+    />
+    <!-- <TresPlaneGeometry :args="[width, height]" /> -->
+
     <TresShaderMaterial
       :vertex-shader="commonVertex"
       :fragment-shader="noiseFrag"
