@@ -15,7 +15,7 @@ useSeoMeta({
 
 <template>
   <main class="slide-enter-content flex flex-col gap-16 min-h-screen p-8">
-    <div class="fixed inset-0 !pointer-events-none">
+    <div class="fixed inset-0 !pointer-events-none -z-10">
       <div class="filter-[url(#noiseFilter)] bg-black fixed inset-0 z-50 opacity-25 pointer-events-none" />
 
       <svg class="absolute inset-0">
