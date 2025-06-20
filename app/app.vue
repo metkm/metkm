@@ -36,9 +36,6 @@ useSeoMeta({
         window-size
         class="!pointer-events-none opacity-50"
       >
-        <!-- <TresOrthographicCamera
-          :position="[0, 0, 1]"
-        /> -->
         <TresPerspectiveCamera
           :position="[0, -1, 0.8]"
           :look-at="[0, 0, -0.8]"

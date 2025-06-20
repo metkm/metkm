@@ -1,18 +1,17 @@
 <script setup lang="ts">
+import type { Mesh } from 'three'
 import { Color, Vector2 } from 'three'
 import vertex from '~/shader/vertex-gradient.glsl?raw'
 import noise from '~/shader/noise-gradient.glsl?raw'
-
-const width = ref(window.innerWidth)
-const height = ref(window.innerHeight)
 
 const palette = ['#f2766b', '#586166', '#081b26', '#f2766b', '#586166', '#081b26']
 const colors = palette.map(color => new Color(color))
 
 const { onLoop } = useRenderLoop()
+const mesh = shallowRef<Mesh>()
 
 const uniforms = {
-  resolution: { value: new Vector2(width.value, height.value) },
+  resolution: { value: new Vector2(window.innerWidth, window.innerHeight) },
   colors: { value: colors },
   time: { value: 0 },
 }
@@ -29,18 +28,15 @@ onMounted(() => {
     const h = window.innerHeight
 
     val.set(w, h)
-    width.value = w
-    height.value = h
   })
 })
 </script>
 
 <template>
-  <TresMesh>
+  <TresMesh ref="mesh">
     <TresPlaneGeometry
-      :args="[3.5, 2, 300 * 3.5, 300 * 2]"
+      :args="[3.5, 2, 200, 200]"
     />
-    <!-- <TresPlaneGeometry :args="[width, height]" /> -->
 
     <TresShaderMaterial
       :vertex-shader="vertex"
