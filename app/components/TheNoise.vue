@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Color, Vector2 } from 'three'
-import commonVertex from '~/shader/vertex.glsl?raw'
-import noiseFrag from '~/shader/noise.glsl?raw'
+import vertex from '~/shader/vertex-gradient.glsl?raw'
+import noise from '~/shader/noise-gradient.glsl?raw'
 
 const width = ref(window.innerWidth)
 const height = ref(window.innerHeight)
@@ -43,8 +43,8 @@ onMounted(() => {
     <!-- <TresPlaneGeometry :args="[width, height]" /> -->
 
     <TresShaderMaterial
-      :vertex-shader="commonVertex"
-      :fragment-shader="noiseFrag"
+      :vertex-shader="vertex"
+      :fragment-shader="noise"
       :uniforms="uniforms"
     />
   </TresMesh>
