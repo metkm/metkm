@@ -61,8 +61,6 @@ useSeoMeta({
     </div>
 
     <article class="max-w-xl mx-auto slide-enter">
-      <NuxtLink to="/about">About page</NuxtLink>
-
       <p class="mb-6">
         Hello! I'm someone who's passionate about working with a variety of technologies. I enjoy
         exploring how others build things and diving deep into how everything works under the hood,
