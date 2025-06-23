@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: {
         lang: 'en',
-        style: 'background-color: var(--ui-color-neutral-950); color: var(--ui-color-neutral-700);',
+        style: 'background-color: oklch(14.1% 0.005 285.823); color: var(--ui-color-neutral-700); min-height: 100vh;',
       },
       link: [
         {

@@ -34,7 +34,8 @@ useSeoMeta({
 
       <TresCanvas
         window-size
-        class="!pointer-events-none opacity-80"
+        class="!pointer-events-none canvas-enter"
+        clear-color="black"
       >
         <TresPerspectiveCamera
           :position="[0, 0.8, 1.5]"

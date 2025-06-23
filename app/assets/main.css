@@ -8,11 +8,7 @@
   }
 }
 
-:root {
-  /* --ui-bg: var(--color-zinc-950); */
-}
-
-@keyframes fade {
+@keyframes fade-in {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -24,9 +20,22 @@
 }
 
 .slide-enter {
-  animation: fade 1s both 1;
+  animation: fade-in 1s both 1;
   --enter-stage: 0;
   animation-delay: calc(150ms * var(--enter-stage));
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.canvas-enter {
+  animation: fade 1s both 1;
 }
 
 .slide-enter-content > *:nth-child(1) {
