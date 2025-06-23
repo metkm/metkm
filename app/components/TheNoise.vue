@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { Mesh } from 'three'
 import { Color, Vector2 } from 'three'
-import vertex from '~/shader/vertex-gradient.glsl?raw'
-import noise from '~/shader/fragment-gradient.glsl?raw'
+import vertex from '~/shader/vertex-gradient2.glsl?raw'
+import noise from '~/shader/fragment-gradient2.glsl?raw'
 
 const palette = ['#f2766b', '#586166', '#081b26', '#f2766b', '#586166', '#081b26']
 const colors = palette.map(color => new Color(color))
