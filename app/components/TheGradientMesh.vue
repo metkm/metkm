@@ -30,12 +30,22 @@ onMounted(() => {
     val.set(w, h)
   })
 })
+
+const handlePlane = (element: Element | globalThis.ComponentPublicInstance | null) => {
+  if (!element || !(element instanceof PlaneGeometry)) {
+    return
+  }
+
+  const degreePerPi = Math.PI * 2 / 360
+  element.rotateX(degreePerPi * 90)
+}
 </script>
 
 <template>
   <TresMesh ref="mesh">
     <TresPlaneGeometry
-      :args="[3.5, 2, 200, 200]"
+      :ref="handlePlane"
+      :args="[6, 4, 250, 200]"
     />
 
     <TresShaderMaterial

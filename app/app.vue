@@ -34,14 +34,14 @@ useSeoMeta({
 
       <TresCanvas
         window-size
-        class="!pointer-events-none opacity-50"
+        class="!pointer-events-none opacity-80"
       >
         <TresPerspectiveCamera
-          :position="[0, -1, 0.8]"
-          :look-at="[0, 0, -0.8]"
+          :position="[0, 0.8, 1.5]"
+          :look-at="[0, -0.55, 0]"
         />
 
-        <TheNoise />
+        <TheGradientMesh />
       </TresCanvas>
     </div>
 
