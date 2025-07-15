@@ -15,6 +15,7 @@ import { projects } from '~/projects'
       <img
         :src="item.image"
         class="w-full aspect-video rounded-lg object-cover"
+        loading="lazy"
       >
 
       <div class="p-2">
