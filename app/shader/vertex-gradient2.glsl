@@ -75,7 +75,7 @@ vec3 cosPalette( float t, vec3 a, vec3 b, vec3 c, vec3 d){
 void main() {
   vUv = uv;
 
-  vec2 coord = uv * vec2(3.0, 4.0);
+  vec2 coord = uv * vec2(3.0, 4.5);
 
   float noise = snoise(
     vec3(

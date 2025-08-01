@@ -38,7 +38,7 @@ useSeoMeta({
         clear-color="black"
       >
         <TresPerspectiveCamera
-          :position="[0, 0.8, 1.5]"
+          :position="[0, 1.4, 1.5]"
           :look-at="[0, -0.55, 0]"
         />
 

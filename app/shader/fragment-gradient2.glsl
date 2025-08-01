@@ -1,4 +1,8 @@
-// uniform vec2 resolution;
+uniform vec3 color1;
+uniform vec3 color2;
+uniform vec3 color3;
+
+
 uniform float time;
 
 varying vec2 vUv;
@@ -35,9 +39,9 @@ float snoise(vec2 v){
 }
 
 vec3 palette(float t) {
-  vec3 color1 = vec3(0.949, 0.462, 0.419); // light red
-  vec3 color2 = vec3(0.345, 0.380, 0.4);   // blue-gray
-  vec3 color3 = vec3(0.031, 0.105, 0.149); // dark navy
+  // vec3 color1 = vec3(color[0][0], color[0][1], color[0][2]); // light red
+  // vec3 color2 = vec3(0.345, 0.380, 0.4);   // blue-gray
+  // vec3 color3 = vec3(0.031, 0.105, 0.149); // dark navy
 
   if (t < 0.5) {
       return mix(color3, color2, t * 2.0);
@@ -51,7 +55,7 @@ void main() {
   // vec2 uv = gl_FragCoord.xy / resolution;
   // uv.x *= resolution.x / resolution.y;
 
-  float noise = snoise(vUv + time * 0.1) + 0.25;
+  float noise = snoise((vUv * 1.4) + time * 0.1);
   vec3 color = palette(noise);
 
   // gl_FragColor = vec4(vec3(noise), 1.0);

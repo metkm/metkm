@@ -3,14 +3,26 @@ import { Color, Vector2, DoubleSide, PlaneGeometry } from 'three'
 import vertex from '~/shader/vertex-gradient2.glsl?raw'
 import noise from '~/shader/fragment-gradient2.glsl?raw'
 
-const palette = ['#f2766b', '#586166', '#081b26', '#f2766b', '#586166', '#081b26']
+const _colors = [
+  ['#f2766b', '#586166', '#081b26'],
+  ['#BFA7F3', '#BC316A', '#160C40'],
+  ['#d08dd8', '#075056', '#2b160e'],
+  ['#b2d98b', '#7a572c', '#231c1a'],
+]
+const _color = _colors[Math.floor(Math.random() * _colors.length)]!
+
+const palette = [..._color]
+
 const colors = palette.map(color => new Color(color))
+console.log(colors)
 
 const { onLoop } = useRenderLoop()
 
 const uniforms = {
   resolution: { value: new Vector2(window.innerWidth, window.innerHeight) },
-  colors: { value: colors },
+  color1: { value: colors[0] },
+  color2: { value: colors[1] },
+  color3: { value: colors[2] },
   time: { value: 0 },
 }
 
@@ -34,7 +46,7 @@ const handlePlane = (element: Element | globalThis.ComponentPublicInstance | nul
     return
   }
 
-  const degreePerPi = Math.PI * 2 / 360
+  const degreePerPi = (Math.PI * 2) / 360
   element.rotateX(degreePerPi * 90)
 }
 </script>
