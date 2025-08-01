@@ -12,9 +12,7 @@ const _colors = [
 const _color = _colors[Math.floor(Math.random() * _colors.length)]!
 
 const palette = [..._color]
-
 const colors = palette.map(color => new Color(color))
-console.log(colors)
 
 const { onLoop } = useRenderLoop()
 

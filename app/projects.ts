@@ -5,6 +5,7 @@ export const projects = [
     image: '/images/spoti-wrapped.webp',
     github: 'https://github.com/metkm/spoti-wrapped',
     description: 'Uses Spotify API and web workers for good performance.',
+    url: 'https://spoti-wrapped.vercel.app/',
     usedTechnologies: [
       {
         icon: 'i-material-icon-theme:nuxt',
@@ -17,6 +18,7 @@ export const projects = [
     image: '/images/otobusum-anlik.webp',
     github: 'https://github.com/metkm/otobusum-anlik',
     description: 'Otobüsüm Nerede alternative with extra features.',
+    url: 'https://play.google.com/store/apps/details?id=com.anonymous.otobusumanlik',
     usedTechnologies: [
       {
         icon: 'i-material-icon-theme:rust',
@@ -56,6 +58,7 @@ export const projects = [
     image: '/images/spodate.webp',
     github: 'https://github.com/metkm/spodate',
     description: 'Vue app with cool animations using motion. Spotify API',
+    url: 'https://spodate.vercel.app/',
     usedTechnologies: [
       {
         icon: 'i-material-icon-theme:vue',

@@ -19,7 +19,14 @@ import { projects } from '~/projects'
       >
 
       <div class="p-2">
-        <p>{{ item.title }}</p>
+        <a
+          :href="item.url"
+          target="_blank"
+          class="hover:text-primary-400"
+        >
+          {{ item.title }}
+        </a>
+
         <p class="text-(--ui-text-dimmed)">
           {{ item.description }}
         </p>
