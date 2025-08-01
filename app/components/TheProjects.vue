@@ -1,5 +1,20 @@
 <script setup lang="ts">
 import { projects } from '~/projects'
+
+const ItemTitle = defineComponent(
+  (props: { link?: boolean }, { slots }) => {
+    return () => {
+      return h(props.link ? 'a' : 'p', slots.default?.())
+    }
+  },
+  {
+    props: {
+      link: {
+        type: Boolean,
+      },
+    },
+  },
+)
 </script>
 
 <template>
@@ -19,13 +34,22 @@ import { projects } from '~/projects'
       >
 
       <div class="p-2">
-        <a
+        <ItemTitle
+          :href="item.url"
+          target="_blank"
+          class="hover:text-primary-400"
+          :link="!!item.url"
+        >
+          {{ item.title }}
+        </ItemTitle>
+
+        <!-- <a
           :href="item.url"
           target="_blank"
           class="hover:text-primary-400"
         >
           {{ item.title }}
-        </a>
+        </a> -->
 
         <p class="text-(--ui-text-dimmed)">
           {{ item.description }}
